@@ -1,0 +1,17 @@
+*{
+    display:flex;
+}
+button{
+    background-color: transparent;
+    width:100%;
+    border:none;
+}
+button:hover{
+    cursor:pointer;
+    background-color: #a4c5fb21;
+}
+.leftsidelinks{
+    /* background-color: #0a59d821; */
+    background-color: black;
+    color:#0a59d876;
+}

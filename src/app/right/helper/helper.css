@@ -1,0 +1,137 @@
+h1{
+    margin-left:2vw;
+}
+section{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.helper-container{
+    display: flex;
+    gap:1.2vw;
+}
+.helper-container>*{
+    border-radius:3px;
+}
+#Addhelper{
+    display: flex;
+    color:white;
+    padding:1px 10px;
+    background-color: rgb(49, 6, 205);
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+button{
+    text-decoration: none;
+    /* color:grey; */
+    background-color:transparent;
+    border:1px solid grey;
+    padding: 5px 10px;
+}
+button:hover{
+    color: black;
+    background-color: lightgrey;
+    cursor:pointer
+}
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 20
+}
+input{
+    border:1px solid grey;
+    padding:3px 10px;
+}
+.center-container{
+    display:flex;
+    gap:2vw;
+    padding: 2vh 2vw;
+}
+.center-container>*{
+    background-color: rgb(245, 241, 241);
+    border-radius: 6px;
+    border:1px solid rgb(210, 191, 191);
+    height: 70vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+.center-container::-wekit-scrollbar{
+    display:none;
+}
+.center-container1{
+    width: 30%;
+}
+.center-container2{
+    width: 100%;
+    height: 80%;
+}
+.helper-item{
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    border-bottom: 1px solid rgb(210, 191, 191);
+}
+.helper-item:hover{
+    background-color: rgb(234, 239, 252);
+    cursor: pointer;
+}
+#boxes{
+    display:flex;
+    gap:10px;
+}
+.sort-box {
+    margin-top:5vh;
+    align-items: left;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    z-index: 2;
+    display:flex;
+    flex-direction: column;
+    position:absolute;
+    padding:1px 1% 1% 1%;
+}
+#sb{
+    font-size: 14px;
+}
+.sb1{
+    background-color: transparent;
+    padding: 5px 10px;
+    width:180px;
+    align-items: center;
+    font-weight: bolder;
+    border:none;
+    display:flex;
+    justify-content: space-between;
+    margin:0;
+    border-radius: 3px;
+}
+.sb1 p{
+    align-items: center;
+    text-align: center;
+    padding:5px 0;
+    margin:0;
+}
+.sb1 svg{
+    height: 20px;
+}
+.sb1:hover{
+    cursor: pointer;
+    background-color: transparent;
+}
+.filter-box {
+    margin-top:5vh;
+    align-items: left;
+    margin-left:4.2vw;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    z-index: 2;
+    display:flex;
+    flex-direction: column;
+    position:absolute;
+    padding:1px 1% 1% 1%;;
+}

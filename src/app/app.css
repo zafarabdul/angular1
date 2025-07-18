@@ -1,0 +1,22 @@
+.app-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1px;
+  height: 100vh;
+  width: 100vw;
+}
+
+.app-container > :first-child {
+  color: black;
+  width: 20vw;
+  background-color: #0a59d821;
+}
+
+.app-container > :last-child {
+  width: 80vw;
+  background-color: white;
+}
+.left-container{
+  padding:10px 0px 10px 10px;
+  overflow-y:scroll;
+}
