@@ -7,7 +7,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1f1f1f"><path d="M456.18-192Q446-192 439-198.9t-7-17.1v-227L197-729q-9-12-2.74-25.5Q200.51-768 216-768h528q15.49 0 21.74 13.5Q772-741 763-729L528-443v227q0 10.2-6.88 17.1-6.89 6.9-17.06 6.9h-47.88ZM480-498l162-198H317l163 198Zm0 0Z"/></svg>
         </button>
         <button class="btn" (click)="toggleVis(3)"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1f1f1f"><path d="M216-96q-29.7 0-50.85-21.5Q144-139 144-168v-528q0-29 21.15-50.5T216-768h72v-96h72v96h240v-96h72v96h72q29.7 0 50.85 21.5Q816-725 816-696v528q0 29-21.15 50.5T744-96H216Zm0-72h528v-360H216v360Zm0-432h528v-96H216v96Zm0 0v-96 96Z"/></svg></button>
-        <input type="text" [(ngModel)]="searchText" placeholder="Enter name" (input)="SearchItem()" >
+        <input id="textbox" type="text" [(ngModel)]="searchText" placeholder="Enter name" (input)="SearchItem()" >
         <p id="showlen">{{tempData().length}} helpers</p>
     </div>
     <div *ngIf="isVisible()" class="sort-box">
@@ -27,6 +27,7 @@
                     <div>
                         <p class="fb">Service</p>
                         <select name="services" >
+                            <option disabled selected >Select Services</option>
                                 <option value="a">asdssd</option>
                                 <option value="b">bsdsd</option>
                                 <option value="c">sdsdc</option>
@@ -41,18 +42,7 @@
                     </div>
                     <div>
                         <p class="fb">Organization</p>
-                        <select name="services">
-                                <option disabled selected >Select Organization</option>
-                                <option value="b">bsdsd</option>
-                                <option value="c">sdsdc</option>
-                                <option value="e">sdsdse</option>
-                                <option value="e">sdsdse</option>
-                                <option value="e">sdsdse</option>
-                                <option value="e">sdsdse</option>
-                                <option value="e">sdsdse</option>
-                                <option value="e">sdsdse</option>
-
-                        </select>
+                        
                     </div>
                 </div>
                 <div></div>
@@ -88,7 +78,7 @@
                 </span>
             </span>
             <div id="btns">
-                <button class="edit-btn">
+                <button class="edit-btn" routerLink="edit/" >
                     <svg xmlns="http://www.w3.org/2000/svg" width="16px" viewBox="0 -960 960 960"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg>
                 </button>
                 <button class="bin-btn">
@@ -103,12 +93,12 @@
             <div style="display:flex;align-items: center;gap:10px"><p>Personal Details</p><div class="line"></div></div>
             <span class="comp"><p>Gender</p><p> {{ defaultData()?.gender }}</p></span>
             <span class="comp"><p>Languages</p><p> {{ defaultData()?.language }}</p></span>
-             <span class="comp"><p>Mobile No</p><p> {{ defaultData()?.language }}</p></span>
+             <span class="comp"><p>Mobile No</p><p> {{ defaultData()?.mobile }}</p></span>
              <span class="comp"><p>Email Id</p><p> {{ defaultData()?.email }}</p></span>
              <span class="comp"><p>KYC Document</p><p> {{ defaultData()?.language }}</p></span>
             <div style="display:flex;align-items: center;gap:10px"><p>Service Details</p><div class="line"></div></div>
-             <span class="comp"><p>Type</p><p> {{ defaultData()?.deviceType }}</p></span>
-             <span class="comp"><p>Organization</p><p> {{ defaultData()?.deviceType }}</p></span>
+             <span class="comp"><p>Type</p><p> {{ defaultData()?.serviceType }}</p></span>
+             <span class="comp"><p>Organization</p><p> {{ defaultData()?.organization }}</p></span>
              <span class="comp"><p>Joined On</p><p> {{ defaultData()?.joinedDate }}</p></span>
         </div>
     </div>

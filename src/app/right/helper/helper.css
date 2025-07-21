@@ -14,10 +14,17 @@ section{
 .helper-container>*{
     border-radius:3px;
 }
+#textbox{
+    width: 13vw;
+    padding: 9px 10px;
+    border-radius: 3px;
+    border: 1px solid grey;
+}
 #Addhelper{
     display: flex;
+    border:none;
     color:white;
-    padding:1px 10px;
+    padding:8px 16px;
     background-color: rgb(49, 6, 205);
     align-items: center;
     justify-content: center;
@@ -233,4 +240,11 @@ select{
 #cc-nav #btns{
     display: flex;
     gap: 0.7vw;
+}
+.btn{
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: 1px solid rgb(157, 155, 155);
+    cursor: pointer;
 }
