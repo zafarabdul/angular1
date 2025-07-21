@@ -9,6 +9,7 @@ section{
 .helper-container{
     display: flex;
     gap:1.2vw;
+    align-items: center;
 }
 .helper-container>*{
     border-radius:3px;
@@ -25,14 +26,20 @@ section{
 button{
     text-decoration: none;
     /* color:grey; */
+    /* margin:0; */
     background-color:transparent;
     border:1px solid grey;
-    padding: 5px 10px;
+    padding: 1px 7px;
 }
 button:hover{
     color: black;
     background-color: lightgrey;
     cursor:pointer
+}
+#showlen{
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
 }
 .material-symbols-outlined {
   font-variation-settings:
@@ -44,21 +51,25 @@ button:hover{
 input{
     border:1px solid grey;
     padding:3px 10px;
+    width:13vw;
 }
 .center-container{
     display:flex;
     gap:2vw;
     padding: 2vh 2vw;
+    height: 80vh;
 }
 .center-container>*{
     background-color: rgb(245, 241, 241);
     border-radius: 6px;
     border:1px solid rgb(210, 191, 191);
-    height: 70vh;
     overflow-y: scroll;
     scrollbar-width: none;
 }
-.center-container::-wekit-scrollbar{
+.center-container1::-wekit-scrollbar{
+    display:none;
+}
+.center-container2::-wekit-scrollbar{
     display:none;
 }
 .center-container1{
@@ -66,13 +77,21 @@ input{
 }
 .center-container2{
     width: 100%;
-    height: 80%;
+    padding:2vh 2vw;
 }
 .helper-item{
-    justify-content: space-between;
     align-items: center;
-    padding: 5px 10px;
+    font-size: smaller;
+    padding: 8px 10px;
     border-bottom: 1px solid rgb(210, 191, 191);
+    display: flex;
+    gap:1vw;
+}
+.helper-image .helper-image{
+    width: 2vw;
+    height: 1vw;
+    border-radius: 50%;
+    object-fit: cover;
 }
 .helper-item:hover{
     background-color: rgb(234, 239, 252);
@@ -96,13 +115,14 @@ input{
 }
 #sb{
     font-size: 14px;
+    font-weight: bolder;
 }
 .sb1{
     background-color: transparent;
     padding: 5px 10px;
     width:180px;
+    font-weight: 500;
     align-items: center;
-    font-weight: bolder;
     border:none;
     display:flex;
     justify-content: space-between;
@@ -134,4 +154,83 @@ input{
     flex-direction: column;
     position:absolute;
     padding:1px 1% 1% 1%;;
+}
+#filterinner{
+    width:14vw;
+}
+#filterinner div{
+    font-size: 14px;
+    font-weight: 500;
+    margin-top:0;
+    margin-bottom: 10px;}
+.fb{
+    font-size: 14px;
+    margin:2px;
+}
+select{
+    width: 100%;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid grey;
+}
+.helper-image {
+    width: 4vw;
+    height: 4vw;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.helper-image1 {
+    width: 2.9vw;
+    height: 2.9vw;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.helper-item-details{
+    display:flex;
+    flex-direction: column;
+}
+.helper-item-age{
+    font-size: 12px;
+    color: grey;
+    margin:0;
+    padding:0;
+}
+.line{
+    flex:1;
+    height:2px;
+    background-color: rgb(210, 191, 191);
+}
+.comp{
+    display: flex;
+    align-items: center;
+
+}
+.comp>:first-child{
+    font-size: 13px;
+    font-weight: 500;
+    width:10vw;
+    color: grey;
+}
+.comp>:last-child{
+    font-size: 13px;
+}
+.edit-btn , .bin-btn{
+    background-color: white;
+    margin:0;
+    padding:4px 5px 2px 5px;
+    border: 1px solid rgb(157, 155, 155);
+    border-radius: 10%;
+    cursor: pointer;
+    align-items: center;
+    text-align: center;
+}
+#cc-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1vh auto;
+}
+#cc-nav #btns{
+    display: flex;
+    gap: 0.7vw;
 }

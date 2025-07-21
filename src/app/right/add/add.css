@@ -1,0 +1,39 @@
+#back{
+    border:none;
+    background-color: transparent;
+    color: #000;
+    cursor:pointer;
+    margin:0;
+    padding:0;
+}
+#all{
+    display:flex;
+    justify-content: space-between;
+    margin:0;
+    padding:1vh 1.5vw;
+    align-items: center;
+    text-align:center;
+}
+#all svg{
+    height:20px;
+    width: 20px;
+    margin:0;
+    padding:0;
+    cursor:pointer;
+}
+#leftpart{
+    width: 14vw;
+    height:80vh;
+    padding: 20px;
+    background-color: rgb(228, 229, 231);
+    border-radius: 10px;
+}
+#leftpart p{
+    color:black;
+    padding:7px 10px;
+    margin:0;
+    border-radius: 5px;
+}
+section{
+    padding:0vh 2vw;
+}

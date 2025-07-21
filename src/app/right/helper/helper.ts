@@ -78,7 +78,7 @@ SearchItem(): void {
       // console.log('triggered a');
       this.isVisible.set(false);
     }
-    if(!target.closest('filter-box') && !target.closest('#filter')){
+    if(!target.closest('.filter-box') && !target.closest('#filter')){
       console.log('sdfds');
       this.isVisiblea.set(false);
       // console.log('triggered b');

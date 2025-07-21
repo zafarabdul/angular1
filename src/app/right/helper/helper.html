@@ -3,52 +3,59 @@
 <section>
     <div class="helper-container">
         <button class="btn" id="sort" (click)="toggleVis(1)"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1f1f1f"><path d="M288-144 96-336l192-192 51 51-105 105h582v72H234l105 105-51 51Zm384-288-51-51 105-105H144v-72h582L621-765l51-51 192 192-192 192Z"/></svg></button>
-                    <div *ngIf="isVisible()" class="sort-box">
-                <p id="sb">Sort By</p>
-                <button class="sb1" (click)="togglesort(0)" [ngStyle]="{'background-color' : (sortedBy==0)?'rgb(155, 201, 255)':''}" >
-                    <p>Helpers Name(A-Z) </p>
-                    <svg *ngIf="sortedBy==0" xmlns="http://www.w3.org/2000/svg"  viewBox="0 -960 960 960" width="24px" fill="rgb(98, 26, 255);"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
-                </button>
-                <button class="sb1" (click)="togglesort(1)" [ngStyle]="{'background-color':(sortedBy==1)?'rgb(155, 201, 255)':''}">
-                    <p>Employee Id </p>
-                    <svg *ngIf="sortedBy==1" xmlns="http://www.w3.org/2000/svg"  viewBox="0 -960 960 960" width="24px" fill="rgb(98, 26, 255);"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
-                </button>
-            </div>
         <button class="btn" id="filter" (click)="toggleVis(2)">
             <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1f1f1f"><path d="M456.18-192Q446-192 439-198.9t-7-17.1v-227L197-729q-9-12-2.74-25.5Q200.51-768 216-768h528q15.49 0 21.74 13.5Q772-741 763-729L528-443v227q0 10.2-6.88 17.1-6.89 6.9-17.06 6.9h-47.88ZM480-498l162-198H317l163 198Zm0 0Z"/></svg>
         </button>
         <button class="btn" (click)="toggleVis(3)"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1f1f1f"><path d="M216-96q-29.7 0-50.85-21.5Q144-139 144-168v-528q0-29 21.15-50.5T216-768h72v-96h72v96h240v-96h72v96h72q29.7 0 50.85 21.5Q816-725 816-696v528q0 29-21.15 50.5T744-96H216Zm0-72h528v-360H216v360Zm0-432h528v-96H216v96Zm0 0v-96 96Z"/></svg></button>
         <input type="text" [(ngModel)]="searchText" placeholder="Enter name" (input)="SearchItem()" >
+        <p id="showlen">{{tempData().length}} helpers</p>
     </div>
-    <!-- <div id="boxes"> -->
-            <!-- <div *ngIf="isVisible()" class="sort-box">
-                <p id="sb">Sort By</p>
-                <button class="sb1" (click)="togglesort(0)" [ngStyle]="{'background-color' : (sortedBy==0)?'rgb(155, 201, 255)':''}" >
-                    <p>Helpers Name(A-Z) </p>
-                    <svg *ngIf="sortedBy==0" xmlns="http://www.w3.org/2000/svg"  viewBox="0 -960 960 960" width="24px" fill="rgb(98, 26, 255);"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
-                </button>
-                <button class="sb1" (click)="togglesort(1)" [ngStyle]="{'background-color':(sortedBy==1)?'rgb(155, 201, 255)':''}">
-                    <p>Employee Id </p>
-                    <svg *ngIf="sortedBy==1" xmlns="http://www.w3.org/2000/svg"  viewBox="0 -960 960 960" width="24px" fill="rgb(98, 26, 255);"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
-                </button>
-            </div> -->
+    <div *ngIf="isVisible()" class="sort-box">
+    <p id="sb">Sort By</p>
+    <button class="sb1" (click)="togglesort(0)" [ngStyle]="{'background-color' : (sortedBy==0)?'rgb(155, 201, 255)':''}" >
+        <p>Helpers Name(A-Z) </p>
+        <svg *ngIf="sortedBy==0" xmlns="http://www.w3.org/2000/svg"  viewBox="0 -960 960 960" width="24px" fill="rgb(98, 26, 255);"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
+    </button>
+    <button class="sb1" (click)="togglesort(1)" [ngStyle]="{'background-color':(sortedBy==1)?'rgb(155, 201, 255)':''}">
+        <p>Employee Id </p>
+        <svg *ngIf="sortedBy==1" xmlns="http://www.w3.org/2000/svg"  viewBox="0 -960 960 960" width="24px" fill="rgb(98, 26, 255);"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
+    </button>
+    </div>
             <div *ngIf="isVisiblea()" class="filter-box">
                 <p id="sb">Filter By</p>
-                <div>
-                    <p [style]="'font-size:90%;font-weight:700'">Service</p>
-                    <select name="services" multiple>
-                            <option value="a">asdssd</option>
-                            <option value="b">bsdsd</option>
-                            <option value="c">sdsdc</option>
-                            <option value="e">sdsdse</option>
-                            <option value="e">sdsdse</option>
-                            <option value="e">sdsdse</option>
-                            <option value="e">sdsdse</option>
-                            <option value="e">sdsdse</option>
-                            <option value="e">sdsdse</option>
+                <div id="filterinner">
+                    <div>
+                        <p class="fb">Service</p>
+                        <select name="services" >
+                                <option value="a">asdssd</option>
+                                <option value="b">bsdsd</option>
+                                <option value="c">sdsdc</option>
+                                <option value="e">sdsdse</option>
+                                <option value="e">sdsdse</option>
+                                <option value="e">sdsdse</option>
+                                <option value="e">sdsdse</option>
+                                <option value="e">sdsdse</option>
+                                <option value="e">sdsdse</option>
 
-                    </select>
+                        </select>
+                    </div>
+                    <div>
+                        <p class="fb">Organization</p>
+                        <select name="services">
+                                <option disabled selected >Select Organization</option>
+                                <option value="b">bsdsd</option>
+                                <option value="c">sdsdc</option>
+                                <option value="e">sdsdse</option>
+                                <option value="e">sdsdse</option>
+                                <option value="e">sdsdse</option>
+                                <option value="e">sdsdse</option>
+                                <option value="e">sdsdse</option>
+                                <option value="e">sdsdse</option>
+
+                        </select>
+                    </div>
                 </div>
+                <div></div>
             </div>
     <!-- </div> -->
     <div class="helper-container">
@@ -64,19 +71,45 @@
 <div class="center-container">
     <div class="center-container1">
         <div class="helper-item" *ngFor="let item of tempData()" (click)="changeDef(item.name)" >
-            <div class="helper-item-name">{{item.name}}</div>
-            <div class="helper-item-age">{{item.age}}</div>
+            <img [src]="'https://ui-avatars.com/api/?name='+item?.name" alt="Helper Image" class="helper-image1">
+            <div class="helper-item-details">
+                <div class="helper-item-name">{{item.name}}</div>
+                <div class="helper-item-age">{{item.deviceType}}</div>
+            </div>
         </div>
-
     </div>
     <div class="center-container2">
-        <p>{{ defaultData()?.empId }}</p>
-        <p>{{ defaultData()?.name }}</p>
-        <p>{{ defaultData()?.email}}</p>
-        <p>{{ defaultData()?.gender}}</p>
-        <p>{{ defaultData()?.language}}</p>
-        <p>{{ defaultData()?.mobile}}</p>
-        <p>{{ defaultData()?.deviceType}}</p>
-        <p>{{ defaultData()?.joinedDate}}</p>
+        <div id="cc-nav">
+            <span style="display:flex;align-items: center;">
+                <img [src]="'https://ui-avatars.com/api/?name='+defaultData()?.name" alt="Helper Image" class="helper-image">
+                <span style="display:flex;flex-direction:column;margin-left:1vw;">
+                    <p style="margin:0;padding:0;">{{ defaultData()?.name }}</p>
+                    <p style="margin:0;padding:0;font-size:small;">{{ defaultData()?.deviceType}}</p>
+                </span>
+            </span>
+            <div id="btns">
+                <button class="edit-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16px" viewBox="0 -960 960 960"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg>
+                </button>
+                <button class="bin-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16px" viewBox="0 -960 960 960"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                </button>
+            </div>
+        </div>
+        <div>
+            <div style="display:flex;align-items: center;gap:10px"><p>Employee Id</p><div class="line"></div></div>
+             <span class="comp"><p>Identification Card</p><p> {{ defaultData()?.empId }}</p></span>
+             <span class="comp"><p>Employee Code</p><p> {{ defaultData()?.empId }}</p></span>
+            <div style="display:flex;align-items: center;gap:10px"><p>Personal Details</p><div class="line"></div></div>
+            <span class="comp"><p>Gender</p><p> {{ defaultData()?.gender }}</p></span>
+            <span class="comp"><p>Languages</p><p> {{ defaultData()?.language }}</p></span>
+             <span class="comp"><p>Mobile No</p><p> {{ defaultData()?.language }}</p></span>
+             <span class="comp"><p>Email Id</p><p> {{ defaultData()?.email }}</p></span>
+             <span class="comp"><p>KYC Document</p><p> {{ defaultData()?.language }}</p></span>
+            <div style="display:flex;align-items: center;gap:10px"><p>Service Details</p><div class="line"></div></div>
+             <span class="comp"><p>Type</p><p> {{ defaultData()?.deviceType }}</p></span>
+             <span class="comp"><p>Organization</p><p> {{ defaultData()?.deviceType }}</p></span>
+             <span class="comp"><p>Joined On</p><p> {{ defaultData()?.joinedDate }}</p></span>
+        </div>
     </div>
 </div>
