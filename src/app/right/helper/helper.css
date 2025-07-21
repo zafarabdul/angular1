@@ -1,5 +1,6 @@
-h1{
+#head{
     margin-left:2vw;
+    font-size: larger;
 }
 section{
     display: flex;
@@ -7,6 +8,7 @@ section{
     padding: 10px;
 }
 .helper-container{
+    padding: 0 2vw;
     display: flex;
     gap:1.2vw;
     align-items: center;
@@ -48,13 +50,7 @@ button:hover{
     font-weight: 500;
     margin: 0;
 }
-.material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 20
-}
+
 input{
     border:1px solid grey;
     padding:3px 10px;
@@ -67,7 +63,7 @@ input{
     height: 80vh;
 }
 .center-container>*{
-    background-color: rgb(245, 241, 241);
+    background-color: rgb(247, 247, 247);
     border-radius: 6px;
     border:1px solid rgb(210, 191, 191);
     overflow-y: scroll;

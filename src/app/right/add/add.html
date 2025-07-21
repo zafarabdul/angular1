@@ -4,16 +4,156 @@
             <button  id="back"routerLink=""> 
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" ><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg>
             </button>
-            <p>Edit Helper</p>
+            <p>Add Helper</p>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 -960 960 960" ><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg>
 </div>
+<div style="display:flex;gap:1vw;">
     <div id="leftpart">
-        <p (click)="(isHelperCh(true))" [ngStyle]="{'background-color': isHelper ? 'rgb(138, 136, 136)' : ''}">
-            Helper Details
-        </p>
-        <p (click)="(isHelperCh(false))" [ngStyle]="{'background-color': !isHelper ? 'rgb(138, 136, 136)' : ''}">
-            Documents
-        </p>
+        <div class="lbox">
+            <div class="point" [ngStyle]="{
+                'background-color': pageNo>=1 ? 'rgb(109, 109, 243)' : 'grey',
+                'box-shadow': pageNo>=1 ? '0px 0px 10px blue':'0 0 0'
+                }"><i *ngIf="pageNo>1" class="fa-solid fa-check"></i></div>
+            <p style="display:flex;flex-direction:column;margin-left:20px;">
+                <span>Helper Details</span>
+                <span style="font-size:70%">Add helper details</span>
+            </p>
+        </div>
+        <div class="lbox">
+            <div class="point" [ngStyle]="{
+                'background-color': pageNo>=2 ? 'rgb(109, 109, 243)' : 'grey',
+                'box-shadow': pageNo>=2 ? '0px 0px 10px blue':'0 0 0'
+                }"><i *ngIf="pageNo>2" class="fa-solid fa-check"></i></div>
+            <p style="display:flex;flex-direction:column;margin-left:20px;">
+                <span>Documents</span>
+                <span style="font-size:70%">Upload related documents</span>
+            </p>
+        </div>
+        <div class="lbox">
+            <div class="point" [ngStyle]="{
+                'background-color': pageNo>=3 ? 'rgb(109, 109, 243)' : 'grey',
+                'box-shadow': pageNo>=3 ? '0px 0px 10px blue':'0 0 0'
+                }"><i *ngIf="pageNo>3" class="fa-solid fa-check"></i></div>
+            <p style="display:flex;flex-direction:column;margin-left:20px;">
+                <span>Review</span>
+                <span style="font-size:70%">check information and confirm</span>
+            </p>
+        </div>
     </div>
+    <div id="right">
+        <form [formGroup]="AddForm" *ngIf="pageNo==1">
+            <input type="file" accept=".png , .jpeg , .jpg" hidden id="inputImg">
+                <label for="inputImg" style="margin:0;padding:0;">
+                    <div class="img">
+                    <span style="margin:0;padding:0;font-size:medium;">
+                        <svg xmlns="http://www.w3.org/2000/svg" style="margin:0;padding:0;" height="29px" viewBox="0 -960 960 960" width="29px" fill="rgb(89, 87, 222)"><path d="M260-160q-91 0-155.5-63T40-377q0-78 47-139t123-78q25-92 100-149t170-57q117 0 198.5 81.5T760-520q69 8 114.5 59.5T920-340q0 75-52.5 127.5T740-160H520q-33 0-56.5-23.5T440-240v-206l-64 62-56-56 160-160 160 160-56 56-64-62v206h220q42 0 71-29t29-71q0-42-29-71t-71-29h-60v-80q0-83-58.5-141.5T480-720q-83 0-141.5 58.5T280-520h-20q-58 0-99 41t-41 99q0 58 41 99t99 41h100v80H260Zm220-280Z"/></svg>
+                        Upload Photo
+                    </span>
+                </div>
+            </label>
+            <p style="color:grey;font-size:x-small">Upload photo (.png , .jpeg)</p>
+            <span class="item" style="font-size: small;">
+                <p>Type Of Service *</p>
+                <input type="text" formControlName="typeOfService">
+            </span>
+            <span class="item" style="font-size: small;">
+                <p>Organization Name *</p>
+                <input type="text" formControlName="organizationName" placeholder="Organization Name">
+            </span>
+            <span class="item" style="font-size: small;">
+                <p>Full Name *</p>
+                <input type="text" formControlName="name" placeholder="Full Name">
+            </span>
+            <span class="item" style="font-size: small;">
+                <p >Languages *</p>
+                <input type="text" formControlName="languages">
+            </span>
+            <span class="item" style="font-size: small;">
+                <p>Gender *</p>
+                <div style="display:flex;gap:10px;margin-top:10px;">
+                    <label>
+                        <input type="radio" formControlName="gender" value="male"> Male
+                    </label>
+                    <label>
+                        <input type="radio" formControlName="gender" value="female"> Female
+                    </label>
+                    <label>
+                        <input type="radio" formControlName="gender" value="other"> Other
+                    </label>
+                </div>
+            </span>
+            <span class="item" style="font-size: small;">
+                <p>Phone *</p>
+                <input type="text" formControlName="mobile">
+            </span>
+            <span class="item" style="font-size: small;">
+                <p>Email *</p>
+                <input type="email" formControlName="email">
+            </span>
+            <button class="nxbtn" (click)="add(1)">Next </button>
+        </form>
+               <form [formGroup]="AddForm" *ngIf="pageNo==2">
+            <span class="item" style="font-size: small;">
+                <p>Type Of Service *</p>
+                <input type="text" formControlName="typeOfService">
+            </span>
+            <div id="buttons">
+                <button class="nxbtn" (click)="add(1)">Next </button>
+                <button class="prbtn" (click)="add(2)">Previous </button>
+            </div>
+        </form>
+        <form [formGroup]="AddForm" *ngIf="pageNo==3">
+            <input type="file" accept=".png , .jpeg , .jpg" hidden id="inputImg">
+                <label for="inputImg" style="margin:0;padding:0;">
+                    <div class="img">
+                    <span style="margin:0;padding:0;font-size:medium;">
+                        <svg xmlns="http://www.w3.org/2000/svg" style="margin:0;padding:0;" height="29px" viewBox="0 -960 960 960" width="29px" fill="rgb(89, 87, 222)"><path d="M260-160q-91 0-155.5-63T40-377q0-78 47-139t123-78q25-92 100-149t170-57q117 0 198.5 81.5T760-520q69 8 114.5 59.5T920-340q0 75-52.5 127.5T740-160H520q-33 0-56.5-23.5T440-240v-206l-64 62-56-56 160-160 160 160-56 56-64-62v206h220q42 0 71-29t29-71q0-42-29-71t-71-29h-60v-80q0-83-58.5-141.5T480-720q-83 0-141.5 58.5T280-520h-20q-58 0-99 41t-41 99q0 58 41 99t99 41h100v80H260Zm220-280Z"/></svg>
+                        Upload Photo
+                    </span>
+                </div>
+            </label>
+            <p style="color:grey;font-size:x-small">Upload photo (.png , .jpeg)</p>
+            <span class="item" style="font-size: small;">
+                <p>Type Of Service *</p>
+                <input type="text" formControlName="typeOfService">
+            </span>
+            <span class="item" style="font-size: small;">
+                <p>Organization Name *</p>
+                <input type="text" formControlName="organizationName" placeholder="Organization Name">
+            </span>
+            <span class="item" style="font-size: small;">
+                <p>Full Name *</p>
+                <input type="text" formControlName="name" placeholder="Full Name">
+            </span>
+            <span class="item" style="font-size: small;">
+                <p >Languages *</p>
+                <input type="text" formControlName="languages">
+            </span>
+            <span class="item" style="font-size: small;">
+                <p>Gender *</p>
+                <div style="display:flex;gap:10px;margin-top:10px;">
+                    <label>
+                        <input type="radio" formControlName="gender" value="male"> Male
+                    </label>
+                    <label>
+                        <input type="radio" formControlName="gender" value="female"> Female
+                    </label>
+                    <label>
+                        <input type="radio" formControlName="gender" value="other"> Other
+                    </label>
+                </div>
+            </span>
+            <span class="item" style="font-size: small;">
+                <p>Phone *</p>
+                <input type="text" formControlName="mobile">
+            </span>
+            <span class="item" style="font-size: small;">
+                <p>Email *</p>
+                <input type="email" formControlName="email">
+            </span>
+            <button class="prbtn" (click)="add(2)">Previous </button>
+        </form>
+    </div>
+</div>
 </section>

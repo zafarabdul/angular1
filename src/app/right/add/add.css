@@ -22,10 +22,14 @@
     cursor:pointer;
 }
 #leftpart{
-    width: 14vw;
+    display:flex;
+    flex-direction: column;
+    width: 20vw;
     height:80vh;
     padding: 20px;
-    background-color: rgb(228, 229, 231);
+    gap:3vh;
+    background-color: rgb(235, 235, 237);
+    border:1px solid rgb(214, 213, 213);
     border-radius: 10px;
 }
 #leftpart p{
@@ -36,4 +40,80 @@
 }
 section{
     padding:0vh 2vw;
+}
+.img{
+    color:rgb(89, 87, 222);
+    background-color: rgb(224, 224, 244);
+    border-radius: 50%;
+    height:10vh;
+    align-items: center;
+    text-align: center;
+    width:10vh;
+    padding:7px;
+    border:2px dashed rgb(89, 87, 222);
+}
+.img:hover{
+    cursor: pointer;
+}
+#right{
+    padding:1.5vh 1.5vw;
+    height:80vh;
+    width: 100%;
+    overflow-y: scroll;
+}
+.point{
+    height:15px;
+    width:15px;
+    padding:1px;
+    border-radius:50%;
+    background-color: rgb(109, 109, 243);
+    box-shadow:0px 0px 10px blue;
+    position:absolute;
+}
+.lbox{
+    display:flex;
+    align-items: center;
+    gap:0.5vw;
+}
+
+.item{
+    display: flex;
+    margin:0;
+    flex-direction: column;
+    margin:4vh auto;
+}
+.item *{
+    margin:0;
+}
+.item input{
+    padding:6px;
+    border-radius: 4px;
+    border:1px solid rgb(174, 174, 174);
+}
+.item input:focus{
+    outline:none;
+
+}
+.nxbtn{
+    background-color: black;
+    color:white;
+    float:right;
+    padding:10px 20px;
+    border:none;
+    border-radius:3px;
+}
+.prbtn{
+    background-color: white;
+    color:black;
+    float:right;
+    padding:9px 19px;
+    border:1px solid black;
+    border-radius:3px;
+}
+.fa-solid {
+    margin:4px 3px;
+    padding:0;
+    position: absolute;
+    color:white;
+    font-size: xx-small;
 }

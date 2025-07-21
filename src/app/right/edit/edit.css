@@ -37,3 +37,17 @@
 section{
     padding:0vh 2vw;
 }
+.img{
+    color:rgb(89, 87, 222);
+    background-color: rgb(224, 224, 244);
+    border-radius: 50%;
+    height:10vh;
+    align-items: center;
+    text-align: center;
+    width:10vh;
+    padding:10px;
+    border:2px dashed rgb(89, 87, 222);
+}
+.img:hover{
+    cursor: pointer;
+}
