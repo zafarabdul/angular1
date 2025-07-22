@@ -4,3 +4,6 @@ body{
     padding: 0;
     font-family: Arial, sans-serif;
 }
+button:hover , svg:hover{
+    cursor: pointer;
+}

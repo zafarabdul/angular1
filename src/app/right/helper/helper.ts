@@ -18,7 +18,7 @@ interface HelperItem {
 }
 @Component({
   selector: 'helper',
-  imports: [FormsModule , RouterLink, CommonModule],
+  imports: [FormsModule , RouterLink, CommonModule,NgIf,NgFor],
   standalone :true,
   templateUrl: './helper.html',
   styleUrl: './helper.css'
