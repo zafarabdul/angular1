@@ -8,5 +8,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './right.css'
 })
 export class Right {
-
+  
 }

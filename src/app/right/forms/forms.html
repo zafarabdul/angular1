@@ -1,0 +1,231 @@
+<div id="right">
+  <!-- Step 1 -->
+  <form [formGroup]="AddForm" *ngIf="pageNo === 1">
+    <div style="display:flex;flex-direction: column;padding:2vh 0">
+      <p style="margin:0;font-size: 20px;">Helper Details</p>
+      <p style="font-size:x-small;margin:0;color:grey">
+        Track, add & manage all your helpers in one place
+      </p>
+    </div>
+
+    <!-- Upload Photo -->
+    <input type="file" accept=".png, .jpeg, .jpg" hidden id="inputImg1" formControlName="image" (change)="ImageChange($event)" />
+    <label for="inputImg1" role="button" tabindex="0">
+      <ng-container *ngIf="AddForm.get('image')?.value; else uploadPlaceholder">
+        <img style="border-radius: 50%;" [src]="AddForm.get('image')?.value" width="100" height="100" />
+      </ng-container>
+      <ng-template #uploadPlaceholder>
+        <div class="img">
+          <span style="display: flex; flex-direction: column; align-items: center;">
+            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="29px" fill="rgb(89, 87, 222)">
+              <path d="M260-160q-91 0-155.5-63T40-377q0-78 47-139t123-78..." />
+            </svg>
+            <p style="font-size: 80%">Upload Photo</p>
+          </span>
+        </div>
+      </ng-template>
+    </label>
+    <p style="color: grey; font-size: x-small">Upload photo (.png, .jpeg)</p>
+
+    <!-- Type of Service -->
+    <span class="item">
+      <p>Type Of Service *</p>
+      <mat-form-field>
+        <mat-select formControlName="typeOfService" placeholder="Select Type Of Service">
+          <mat-option value="maid"><i class="ph ph-broom"></i> Maid</mat-option>
+          <mat-option value="cook"><i class="ph ph-cooking-pot"></i> Cook</mat-option>
+          <mat-option value="nurse"><i class="ph ph-first-aid-kit"></i> Nurse</mat-option>
+          <mat-option value="driver"><i class="ph ph-truck"></i> Driver</mat-option>
+        </mat-select>
+        <mat-error>Select type of service</mat-error>
+      </mat-form-field>
+    </span>
+
+    <!-- Organization -->
+    <span class="item">
+      <p>Organization Name *</p>
+      <mat-form-field appearance="fill">
+        <mat-label>Organization Name</mat-label>
+        <mat-select formControlName="organizationName">
+          <mat-option value="ASBL">ASBL</mat-option>
+          <mat-option value="Spring Helpers">Spring Helpers</mat-option>
+        </mat-select>
+        <mat-error *ngIf="AddForm.get('organizationName')?.hasError('required') && AddForm.get('organizationName')?.touched">
+          Organization is required
+        </mat-error>
+      </mat-form-field>
+    </span>
+
+    <!-- Full Name -->
+    <span class="item">
+      <p>Full Name *</p>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Enter Full Name" formControlName="name" />
+        <mat-error *ngIf="AddForm.get('name')?.hasError('required') && AddForm.get('name')?.touched">
+          Full Name Required.
+        </mat-error>
+      </mat-form-field>
+    </span>
+
+    <!-- Languages -->
+    <span class="item">
+      <p>Languages *</p>
+      <mat-form-field appearance="fill">
+        <mat-select formControlName="languages" multiple placeholder="Select Languages">
+          <mat-select-trigger>
+            {{ AddForm.get('languages')?.value?.[0] || '' }}
+            <ng-container *ngIf="(AddForm.get('languages')?.value?.length || 0) > 1">
+              <span class="example-additional-selection">
+                (+{{ (AddForm.get('languages')?.value?.length || 0) - 1 }} 
+                {{ AddForm.get('languages')?.value?.length === 2 ? 'other' : 'others' }})
+              </span>
+            </ng-container>
+          </mat-select-trigger>
+          <mat-option value="english">English</mat-option>
+          <mat-option value="hindi">Hindi</mat-option>
+          <mat-option value="telugu">Telugu</mat-option>
+        </mat-select>
+        <mat-error *ngIf="AddForm.get('languages')?.touched && AddForm.get('languages')?.hasError('required')">
+          Language is required
+        </mat-error>
+      </mat-form-field>
+    </span>
+
+    <!-- Gender -->
+    <span class="item">
+      <p>Gender *</p>
+      <div style="display: flex; gap: 10px; margin-top: 10px">
+        <mat-radio-group formControlName="gender">
+          <mat-radio-button value="male">Male</mat-radio-button>
+          <mat-radio-button value="female">Female</mat-radio-button>
+          <mat-radio-button value="others">Others</mat-radio-button>
+        </mat-radio-group>
+        <mat-error *ngIf="AddForm.get('gender')?.touched && AddForm.get('gender')?.hasError('required')">Gender Required</mat-error>
+      </div>
+    </span>
+
+    <!-- Phone -->
+    <span class="item">
+      <p>Phone *</p>
+      <input type="text" formControlName="mobile" />
+    </span>
+
+    <!-- Email -->
+    <span class="item">
+      <p>Email</p>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Enter Email" formControlName="email" />
+      </mat-form-field>
+    </span>
+
+    <!-- Vehicle -->
+    <span class="item">
+      <p>Choose Vehicle Type</p>
+      <mat-form-field>
+        <mat-select formControlName="vehicleType" placeholder="None">
+          <mat-option value="">None</mat-option>
+          <mat-option value="auto">Auto</mat-option>
+          <mat-option value="bike">Bike</mat-option>
+          <mat-option value="car">Car</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </span>
+
+    <!-- Vehicle Number -->
+    <span *ngIf="AddForm.get('vehicleType')?.value" class="item">
+      <p>Vehicle Number *</p>
+      <mat-form-field>
+        <input matInput placeholder="Enter Vehicle Number" formControlName="vehicleNum" />
+        <mat-error *ngIf="AddForm.get('vehicleNum')?.hasError('required') && AddForm.get('vehicleNum')?.touched">
+          Vehicle Number Is Required.
+        </mat-error>
+      </mat-form-field>
+    </span>
+
+    <!-- KYC Modal Trigger -->
+    <span class="item">
+      <p>KYC Documents *</p>
+      <div class="sqimg" (click)="changeMid()">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="rgb(89, 87, 222)">
+          <path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z" />
+        </svg>
+      </div>
+    </span>
+
+    <button class="nxbtn" (click)="add(1);requestPageChange(true);">Next</button>
+  </form>
+
+  <!-- KYC Modal -->
+  <div id="mid-bar" *ngIf="midBlock">
+    <div id="mid">
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <p style="font-weight: 500">Upload KYC Documents</p>
+        <svg (click)="changeMid()" xmlns="http://www.w3.org/2000/svg" height="27px" viewBox="0 -960 960 960" width="27px">
+          <path d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z" />
+        </svg>
+      </div>
+      <div class="for-line"></div>
+
+      <span id="mid-item">
+        <p>Select Document Type *</p>
+        <input id="mid-box" type="text" placeholder="Document Type" formControlName="DocType" />
+      </span>
+
+      <div>
+        <p style="font-size: small">Please ensure both side documents are uploaded.</p>
+        <input type="file" accept=".png, .jpeg, .jpg" hidden id="inputImg2" (change)="uploadedFile($event)" />
+        <label for="inputImg2">
+          <div class="retimg">
+            <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="rgb(89, 87, 222)">
+              <path d="M260-160q-91 0-155.5-63T40-377..." />
+            </svg>
+            <div style="display: flex; gap: 2px; font-size: small">
+              <div>Click To Upload</div>
+              <span style="color: black">or drag and drop</span>
+            </div>
+          </div>
+        </label>
+      </div>
+
+      <div *ngIf="getFile()" style="display: flex; align-items: center; gap: 10px;">
+        <i class="ph ph-file-image"></i>
+        <p style="font-size: small;">{{ getFile() }}</p>
+      </div>
+
+      <div class="for-line"></div>
+      <div style="display: flex; gap: 10px; justify-content: end">
+        <button class="prbtn" (click)="cancel()">Cancel</button>
+        <button class="svbtn" >Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <form [formGroup]="AddForm" *ngIf="pageNo === 2">
+    <span class="item">
+      <p>Additional Documents *</p>
+      <p style="color:grey;font-size:small;margin-bottom:20px;">
+        Upload related documents. This step is optional.
+      </p>
+      <input type="file" accept=".png, .jpg, .jpeg, .pdf" hidden id="input3" formControlName="AdditionalFiles" />
+      <label for="input3" id="designimg">
+        <div class="sqimg">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="rgb(89, 87, 222)">
+            <path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z" />
+          </svg>
+        </div>
+      </label>
+    </span>
+    <div class="for-line"></div>
+    <div id="buttons">
+      <button class="prbtn" (click)="add(2);requestPageChange(false)">Previous</button>
+      <button class="nxbtn" (click)="add(1);requestPageChange(true)">Next</button>
+    </div>
+  </form>
+
+  <!-- Step 3 -->
+  <form [formGroup]="AddForm" *ngIf="pageNo === 3">
+    <h1>Step 3: Review & Submit</h1>
+    <button class="prbtn" (click)="add(2);requestPageChange(false)">Previous</button>
+  </form>
+</div>
