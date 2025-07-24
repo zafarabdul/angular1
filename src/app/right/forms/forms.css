@@ -62,8 +62,9 @@ section {
 
 #right {
   padding: 1.5vh 1.5vw;
-  height: 80vh;
+  height: 83.5vh;
   width: 100%;
+  border-radius: 5px;
   overflow-y: scroll;
 }
 
@@ -93,7 +94,9 @@ section {
   margin: 0;
 }
 
-
+.item p{
+  font-size:small;
+}
 
 .nxbtn {
   background-color: black;
@@ -196,7 +199,7 @@ section {
 
 #mid {
   width: 30vw;
-  height: 55vh;
+  height: 60vh;
   padding: 2vh 2vw;
   background-color: white;
   display: flex;
@@ -209,6 +212,11 @@ section {
   background-color: rgb(230, 228, 228);
   height: 0.5px;
   margin: 10px 0;
+}
+.line{
+    flex:1;
+    height:2px;
+    background-color: rgb(210, 191, 191);
 }
 
 #mid-item {
@@ -253,6 +261,81 @@ section {
 #right{
     overflow-y: scroll;
 }
-.ph{
+.d{
   margin-right:10px;
+}
+::ng-deep mat-form-field {
+    background-color: white !important;
+    width: 100% !important;
+    height: 54px !important;
+    padding:0 !important;
+    margin:0 !important;
+}
+::ng-deep mat-form-field :focus{
+    background-color: white !important;
+}
+::ng-deep mat-form-field *{
+  background-color: white !important;
+}
+::ng-deep .mat-mdc-text-field-wrapper {
+    background-color:white!important;
+    border:1px solid rgb(221, 216, 216);
+    border-radius: 4px !important;
+    color: black !important;
+    margin:0 !important;
+    padding:10px !important;
+    align-items: center !important;
+    height: 27px !important;
+}
+/* ::ng-deep .mat-mdc-text-field-wrapper :focus{
+    background-color:rgb(3, 2, 2)!important;
+} */
+::ng-deep .mdc-line-ripple::before{
+ border:none !important;
+}
+
+::ng-deep .mdc-line-ripple::after{
+   border:none !important;
+}
+::ng-deep div.mat-mdc-select-panel {
+  background-color: white !important;
+  border-radius: 1px !important;
+  max-height: 180px !important;
+  overflow-y: scroll !important;
+}
+::ng-deep mat-option {
+  padding:0 !important;
+  height: 4px !important;        /* reduce option height */
+  font-size: 13px !important;
+  padding: 0 10px !important;     /* optional: tighter padding */
+}
+/* ::ng-deep mat-option{ */
+  /* height:5px !important; */
+/* } */
+::ng-deep mat-option :hover{ 
+  background-color: rgb(136, 134, 238) !important;
+}
+::ng-deep div.mat-mdc-select-panel :hover{
+  background-color: rgb(136, 134, 238) !important;
+  }
+
+.comp{
+    display: flex;
+    align-items: center;
+
+}
+.comp>:first-child{
+    font-size: 13px;
+    font-weight: 500;
+    width:10vw;
+    color: grey;
+}
+.comp>:last-child{
+    font-size: 13px;
+}
+#third-form{
+    background-color: rgb(234, 234, 234);
+    height: 75vh;
+    border-radius: 10px;
+    padding:2vh 2vw;
 }

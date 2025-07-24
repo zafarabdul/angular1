@@ -1,7 +1,8 @@
 import { Component, signal, computed, HostListener } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule , FormGroup } from '@angular/forms';
 import {CommonModule, NgFor , NgIf} from '@angular/common';
 import { RouterLink } from '@angular/router';
+import {Formdata} from '../../services/formdata';
 interface HelperItem {
   empId: number;
   name: string;
@@ -18,12 +19,13 @@ interface HelperItem {
 }
 @Component({
   selector: 'helper',
-  imports: [FormsModule , RouterLink, CommonModule,NgIf,NgFor],
   standalone :true,
+  imports: [FormsModule , RouterLink, CommonModule,NgIf,NgFor],
   templateUrl: './helper.html',
   styleUrl: './helper.css'
 })
 export class Helper {
+  AddForm!:FormGroup;
   sortedBy=3;
   isVisible = signal<boolean>(false);
   isVisiblea = signal<boolean>(false);
@@ -32,7 +34,8 @@ export class Helper {
   defaultData = computed(() => this.data().find(item => item.name === this.defaultId()));
   tempData = signal<HelperItem[]>([]);
   searchText = signal('');
-  constructor(){
+  constructor(public fdata:Formdata){
+    this.AddForm=this.fdata.AddForm;
     this.tempData.set(this.data().slice(0,7));
     this.defaultId.set(this.data()[0].name);
     this.sortedBy=3;

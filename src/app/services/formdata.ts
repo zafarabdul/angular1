@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class Formdata {
     AddForm= new FormGroup({
+    empId:new FormControl(''),
     image:new FormControl<null | File | undefined>(null),
     typeOfService:new FormControl('',[Validators.required]),
     organizationName:new FormControl('',[Validators.required]),
@@ -17,6 +18,7 @@ export class Formdata {
     vehicleNum:new FormControl<string>('',[Validators.required]),
     file:new FormControl<null | File | undefined>(null,[Validators.required]),
     DocType:new FormControl(''),
-    AdditionalFiles: new FormControl(''),
+    joiningDate:new FormControl(''),
+    AdditionalFiles: new FormControl<null | File>(null),
   })
 }
