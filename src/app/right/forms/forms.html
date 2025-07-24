@@ -1,5 +1,4 @@
 <div id="right">
-  <!-- Step 1 -->
   <form [formGroup]="AddForm" *ngIf="pageNo === 1">
     <div style="display:flex;flex-direction: column;padding:2vh 0">
       <p style="margin:0;font-size: 20px;">Helper Details</p>
@@ -7,27 +6,24 @@
         Track, add & manage all your helpers in one place
       </p>
     </div>
-
-    <!-- Upload Photo -->
-    <input type="file" accept=".png, .jpeg, .jpg" hidden id="inputImg1" formControlName="image" (change)="ImageChange($event)" />
-    <label for="inputImg1" role="button" tabindex="0">
-      <ng-container *ngIf="AddForm.get('image')?.value; else uploadPlaceholder">
+    
+    <input type="file" accept=".png, .jpeg, .jpg" hidden id="inputImg1"  (change)="ImageChange($event)" />
+      @if(AddForm.get('image')?.value!=null){
+        <label for="inputImg1" >
         <img style="border-radius: 50%;" [src]="AddForm.get('image')?.value" width="100" height="100" />
-      </ng-container>
-      <ng-template #uploadPlaceholder>
-        <div class="img">
-          <span style="display: flex; flex-direction: column; align-items: center;">
-            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="29px" fill="rgb(89, 87, 222)">
-              <path d="M260-160q-91 0-155.5-63T40-377q0-78 47-139t123-78..." />
-            </svg>
+         </label>
+      }
+      @else {
+          <div class="img">
+            <label for="inputImg1">
+          <span style="display: flex; flex-direction: column; align-items: center;gap:0px;">
+            <i class="ph ph-cloud-arrow-up" style="font-size: x-large;"></i>
             <p style="font-size: 80%">Upload Photo</p>
           </span>
+           </label>
         </div>
-      </ng-template>
-    </label>
+      }
     <p style="color: grey; font-size: x-small">Upload photo (.png, .jpeg)</p>
-
-    <!-- Type of Service -->
     <span class="item">
       <p>Type Of Service *</p>
       <mat-form-field>
@@ -110,13 +106,19 @@
       <input type="text" formControlName="mobile" />
     </span>
 
-    <!-- Email -->
     <span class="item">
-      <p>Email</p>
-      <mat-form-field class="example-full-width">
+      <p>Email *</p>
+      <mat-form-field>
         <input matInput placeholder="Enter Email" formControlName="email" />
+        <mat-error *ngIf="AddForm.get('email')?.hasError('required') && AddForm.get('email')?.touched">
+          Email required
+        </mat-error>
+        <mat-error *ngIf="AddForm.get('email')?.hasError('email') && AddForm.get('email')?.touched">
+          Enter a valid email
+        </mat-error>
       </mat-form-field>
     </span>
+
 
     <!-- Vehicle -->
     <span class="item">
@@ -131,7 +133,6 @@
       </mat-form-field>
     </span>
 
-    <!-- Vehicle Number -->
     <span *ngIf="AddForm.get('vehicleType')?.value" class="item">
       <p>Vehicle Number *</p>
       <mat-form-field>
@@ -142,7 +143,6 @@
       </mat-form-field>
     </span>
 
-    <!-- KYC Modal Trigger -->
     <span class="item">
       <p>KYC Documents *</p>
       <div class="sqimg" (click)="changeMid()">
@@ -155,7 +155,6 @@
     <button class="nxbtn" (click)="add(1);requestPageChange(true);">Next</button>
   </form>
 
-  <!-- KYC Modal -->
   <div id="mid-bar" *ngIf="midBlock">
     <div id="mid">
       <div style="display: flex; align-items: center; justify-content: space-between;">
@@ -168,17 +167,22 @@
 
       <span id="mid-item">
         <p>Select Document Type *</p>
-        <input id="mid-box" type="text" placeholder="Document Type" formControlName="DocType" />
+          <mat-form-field>
+            <mat-select formControlName="DocType" placeholder="Document Type">
+              <mat-option value="maid">Maid</mat-option>
+              <mat-option value="cook">Cook</mat-option>
+              <mat-option value="nurse">Nurse</mat-option>
+              <mat-option value="driver">Driver</mat-option>
+            </mat-select>
+            <mat-error *ngIf="AddForm.get('DocType')?.touched && AddForm.get('DocType')?.hasError('required')" > Select Any Document </mat-error>
+          </mat-form-field>
       </span>
-
       <div>
         <p style="font-size: small">Please ensure both side documents are uploaded.</p>
         <input type="file" accept=".png, .jpeg, .jpg" hidden id="inputImg2" (change)="uploadedFile($event)" />
         <label for="inputImg2">
           <div class="retimg">
-            <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="rgb(89, 87, 222)">
-              <path d="M260-160q-91 0-155.5-63T40-377..." />
-            </svg>
+            <i class="ph ph-cloud-arrow-up" style="font-size: x-large;"></i>
             <div style="display: flex; gap: 2px; font-size: small">
               <div>Click To Upload</div>
               <span style="color: black">or drag and drop</span>
@@ -195,7 +199,7 @@
       <div class="for-line"></div>
       <div style="display: flex; gap: 10px; justify-content: end">
         <button class="prbtn" (click)="cancel()">Cancel</button>
-        <button class="svbtn" >Save</button>
+        <button class="svbtn">Save</button>
       </div>
     </div>
   </div>

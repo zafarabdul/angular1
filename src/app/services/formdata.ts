@@ -19,5 +19,4 @@ export class Formdata {
     DocType:new FormControl(''),
     AdditionalFiles: new FormControl(''),
   })
-
 }

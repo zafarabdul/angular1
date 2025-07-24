@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component ,Input , Output, EventEmitter, NgModule, Pipe} from '@angular/core';
+import { ChangeDetectorRef, ChangeDetectionStrategy,Component ,Input , Output, EventEmitter, NgModule, Pipe} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, ReactiveFormsModule , FormsModule} from '@angular/forms';
 import { Formdata } from '../../services/formdata';
@@ -6,40 +6,27 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioButton,MatRadioGroup } from '@angular/material/radio';
-interface Food {
-  value: string;
-  viewValue: string;
-}
-
-interface Car {
-  value: string;
-  viewValue: string;
-}
+import { constrainedMemory } from 'node:process';
 
 @Component({
   selector: 'app-forms',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule ,MatSelectModule,MatFormFieldModule, MatInputModule , FormsModule ,MatRadioGroup,MatRadioButton],
   templateUrl: './forms.html',
-  styleUrls: ['./forms.css']
+  styleUrls: ['./forms.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Forms {
 
-  get languages() {
-    return this.AddForm.get('languages');
-  }
-
-
-
-
-
-
-  AddForm: FormGroup;
-  midBlock = false;
-  @Input() pageNo:number=1;
   constructor(public data: Formdata, private readonly cdr: ChangeDetectorRef) {
     this.AddForm = this.data.AddForm;
   }
+  get languages() {
+    return this.AddForm.get('languages');
+  }
+  AddForm: FormGroup;
+  midBlock = false;
+  @Input() pageNo:number=1;
   @Output() pageChange = new EventEmitter<number>();
 
   requestPageChange(forward: boolean) {
@@ -75,16 +62,5 @@ export class Forms {
     }
   }
 
-  ImageChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const file = input.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.AddForm.get('image')?.setValue(reader.result);
-        this.cdr.markForCheck();
-      };
-      reader.readAsDataURL(file);
-    }
-  }
+ 
 }
