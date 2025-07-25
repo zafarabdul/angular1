@@ -1,37 +1,65 @@
-<div id="right" *ngIf="pageNo!=3">
+<div id="right" *ngIf="pageNo != 3">
   <form [formGroup]="AddForm" *ngIf="pageNo === 1">
-    <div style="display:flex;flex-direction: column;padding:2vh 0">
-      <p style="margin:0;font-size: 20px;">Helper Details</p>
-      <p style="font-size:x-small;margin:0;color:grey">
+    <div style="display: flex; flex-direction: column; padding: 2vh 0">
+      <p style="margin: 0; font-size: 20px">Helper Details</p>
+      <p style="font-size: x-small; margin: 0; color: grey">
         Track, add & manage all your helpers in one place
       </p>
     </div>
-    
-    <input type="file" accept=".png, .jpeg, .jpg" hidden id="inputImg1"  (change)="ImageChange($event)" />
-      @if(imgBuffer()){
-        <label for="inputImg1" >
-        <img style="border-radius: 50%;" [src]="imgBuffer()" width="100" height="100" />
-         </label>
-      }
-      @else {
-          <div class="img">
-            <label for="inputImg1">
-          <span style="display: flex; flex-direction: column; align-items: center;gap:0px;">
-            <i class="ph ph-cloud-arrow-up" style="font-size: x-large;"></i>
-            <p style="font-size: 80%">Upload Photo</p>
-          </span>
-           </label>
-        </div>
-      }
+
+    <input
+      type="file"
+      accept=".png, .jpeg, .jpg"
+      hidden
+      id="inputImg1"
+      (change)="ImageChange($event)"
+    />
+    @if(imgBuffer()){
+    <label for="inputImg1">
+      <img
+        style="border-radius: 50%"
+        [src]="imgBuffer()"
+        width="100"
+        height="100"
+      />
+    </label>
+    } @else {
+    <div class="img">
+      <label for="inputImg1">
+        <span
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0px;
+          "
+        >
+          <i class="ph ph-cloud-arrow-up" style="font-size: x-large"></i>
+          <p style="font-size: 80%">Upload Photo</p>
+        </span>
+      </label>
+    </div>
+    }
     <p style="color: grey; font-size: x-small">Upload photo (.png, .jpeg)</p>
     <span class="item">
       <p>Type Of Service *</p>
       <mat-form-field>
-        <mat-select formControlName="typeOfService" placeholder="Select Type Of Service">
-          <mat-option value="maid"><i class="ph ph-broom d"></i> Maid</mat-option>
-          <mat-option value="cook"><i class="ph ph-cooking-pot d"></i> Cook</mat-option>
-          <mat-option value="nurse"><i class="ph ph-first-aid-kit d"></i> Nurse</mat-option>
-          <mat-option value="driver"><i class="ph ph-truck d"></i> Driver</mat-option>
+        <mat-select
+          formControlName="typeOfService"
+          placeholder="Select Type Of Service"
+        >
+          <mat-option value="maid"
+            ><i class="ph ph-broom d"></i> Maid</mat-option
+          >
+          <mat-option value="cook"
+            ><i class="ph ph-cooking-pot d"></i> Cook</mat-option
+          >
+          <mat-option value="nurse"
+            ><i class="ph ph-first-aid-kit d"></i> Nurse</mat-option
+          >
+          <mat-option value="driver"
+            ><i class="ph ph-truck d"></i> Driver</mat-option
+          >
         </mat-select>
         <mat-error>Select type of service</mat-error>
       </mat-form-field>
@@ -39,11 +67,19 @@
     <span class="item">
       <p>Organization Name *</p>
       <mat-form-field appearance="fill">
-        <mat-select formControlName="organizationName" placeholder="Organization Name">
+        <mat-select
+          formControlName="organizationName"
+          placeholder="Organization Name"
+        >
           <mat-option value="ASBL">ASBL</mat-option>
           <mat-option value="Spring Helpers">Spring Helpers</mat-option>
         </mat-select>
-        <mat-error *ngIf="AddForm.get('organizationName')?.hasError('required') && AddForm.get('organizationName')?.touched">
+        <mat-error
+          *ngIf="
+            AddForm.get('organizationName')?.hasError('required') &&
+            AddForm.get('organizationName')?.touched
+          "
+        >
           Organization is required
         </mat-error>
       </mat-form-field>
@@ -52,7 +88,12 @@
       <p>Full Name *</p>
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Enter Full Name" formControlName="name" />
-        <mat-error *ngIf="AddForm.get('name')?.hasError('required') && AddForm.get('name')?.touched">
+        <mat-error
+          *ngIf="
+            AddForm.get('name')?.hasError('required') &&
+            AddForm.get('name')?.touched
+          "
+        >
           Full Name Required.
         </mat-error>
       </mat-form-field>
@@ -60,13 +101,23 @@
     <span class="item">
       <p>Languages *</p>
       <mat-form-field appearance="fill">
-        <mat-select formControlName="languages" multiple placeholder="Select Languages">
+        <mat-select
+          formControlName="languages"
+          multiple
+          placeholder="Select Languages"
+        >
           <mat-select-trigger>
             {{ AddForm.get('languages')?.value?.[0] || '' }}
-            <ng-container *ngIf="(AddForm.get('languages')?.value?.length || 0) > 1">
+            <ng-container
+              *ngIf="(AddForm.get('languages')?.value?.length || 0) > 1"
+            >
               <span class="example-additional-selection">
-                (+{{ (AddForm.get('languages')?.value?.length || 0) - 1 }} 
-                {{ AddForm.get('languages')?.value?.length === 2 ? 'other' : 'others' }})
+                (+{{ (AddForm.get("languages")?.value?.length || 0) - 1 }}
+                {{
+                  AddForm.get("languages")?.value?.length === 2
+                    ? "other"
+                    : "others"
+                }})
               </span>
             </ng-container>
           </mat-select-trigger>
@@ -76,7 +127,12 @@
           <mat-option value="urdu">Urdu</mat-option>
           <mat-option value="tamil">Tamil</mat-option>
         </mat-select>
-        <mat-error *ngIf="AddForm.get('languages')?.touched && AddForm.get('languages')?.hasError('required')">
+        <mat-error
+          *ngIf="
+            AddForm.get('languages')?.touched &&
+            AddForm.get('languages')?.hasError('required')
+          "
+        >
           Language is required
         </mat-error>
       </mat-form-field>
@@ -86,11 +142,22 @@
     <span class="item">
       <p>Gender *</p>
       <div>
-        <mat-radio-group formControlName="gender" >
+        <mat-radio-group formControlName="gender">
           <mat-radio-button color="primary" value="male">Male</mat-radio-button>
-          <mat-radio-button color="primary" value="female">Female</mat-radio-button>
-          <mat-radio-button color="primary" value="others">Others</mat-radio-button>
-          <mat-error style="font-size: x-small !important;margin-left: 1.5vw;" *ngIf="AddForm.get('gender')?.touched && AddForm.get('gender')?.hasError('required')">Gender Required</mat-error>
+          <mat-radio-button color="primary" value="female"
+            >Female</mat-radio-button
+          >
+          <mat-radio-button color="primary" value="others"
+            >Others</mat-radio-button
+          >
+          <mat-error
+            style="font-size: x-small !important; margin-left: 1.5vw"
+            *ngIf="
+              AddForm.get('gender')?.touched &&
+              AddForm.get('gender')?.hasError('required')
+            "
+            >Gender Required</mat-error
+          >
         </mat-radio-group>
       </div>
     </span>
@@ -98,9 +165,14 @@
     <!-- Phone -->
     <span class="item">
       <p>Phone *</p>
-        <mat-form-field class="example-full-width">
+      <mat-form-field class="example-full-width">
         <input matInput placeholder="Phone No" formControlName="mobile" />
-        <mat-error *ngIf="AddForm.get('mobile')?.hasError('required') && AddForm.get('mobile')?.touched">
+        <mat-error
+          *ngIf="
+            AddForm.get('mobile')?.hasError('required') &&
+            AddForm.get('mobile')?.touched
+          "
+        >
           Mobile No Required.
         </mat-error>
       </mat-form-field>
@@ -110,15 +182,24 @@
       <p>Email</p>
       <mat-form-field>
         <input matInput placeholder="Enter Email" formControlName="email" />
-        <mat-error *ngIf="AddForm.get('email')?.hasError('required') && AddForm.get('email')?.touched">
+        <mat-error
+          *ngIf="
+            AddForm.get('email')?.hasError('required') &&
+            AddForm.get('email')?.touched
+          "
+        >
           Email required
         </mat-error>
-        <mat-error *ngIf="AddForm.get('email')?.hasError('email') && AddForm.get('email')?.touched">
+        <mat-error
+          *ngIf="
+            AddForm.get('email')?.hasError('email') &&
+            AddForm.get('email')?.touched
+          "
+        >
           Enter a valid email
         </mat-error>
       </mat-form-field>
     </span>
-
 
     <!-- Vehicle -->
     <span class="item">
@@ -136,8 +217,17 @@
     <span *ngIf="AddForm.get('vehicleType')?.value" class="item">
       <p>Vehicle Number *</p>
       <mat-form-field>
-        <input matInput placeholder="Enter Vehicle Number" formControlName="vehicleNum" />
-        <mat-error *ngIf="AddForm.get('vehicleNum')?.hasError('required') && AddForm.get('vehicleNum')?.touched">
+        <input
+          matInput
+          placeholder="Enter Vehicle Number"
+          formControlName="vehicleNum"
+        />
+        <mat-error
+          *ngIf="
+            AddForm.get('vehicleNum')?.hasError('required') &&
+            AddForm.get('vehicleNum')?.touched
+          "
+        >
           Vehicle Number Is Required.
         </mat-error>
       </mat-form-field>
@@ -148,127 +238,236 @@
       <div class="sqimg" (click)="changeMid()">
         @if(!AddForm.get('file')?.value){
         <i class="ph ph-plus"></i>
-      }
-      @else {
+        } @else {
         <i class="ph ph-file"></i>
-      }
-    </div>
-    <mat-error style="font-size: small !important;"*ngIf="AddForm.get('file')?.hasError('required') && AddForm.get('file')?.touched">Upload Documents *</mat-error>
-    </span>
-    <div class="for-line" style="margin:10px 0;"></div>
-    <button class="nxbtn" (click)="add(1);requestPageChange(true);">Next</button>
-  </form>
-@if(midBlock()){
-  <div id="mid-bar">
-    <div id="mid">
-      <div style="display: flex; align-items: center; justify-content: space-between;">
-        <p style="font-weight: 500">Upload KYC Documents</p>
-        <svg (click)="cancel()" xmlns="http://www.w3.org/2000/svg" height="27px" viewBox="0 -960 960 960" width="27px">
-          <path d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z" />
-        </svg>
+        }
       </div>
-      <div class="for-line"></div>
+      <mat-error
+        style="font-size: small !important"
+        *ngIf="
+          AddForm.get('file')?.hasError('required') &&
+          AddForm.get('file')?.touched
+        "
+        >Upload Documents *</mat-error
+      >
+    </span>
+    <div class="for-line" style="margin: 10px 0"></div>
+    <button class="nxbtn" (click)="add(1); requestPageChange(true)">
+      Next
+    </button>
+  </form>
+  @if(midBlock()){
+        <div id="mid-bar">
+          <div id="mid">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
+              <p style="font-weight: 500">Upload KYC Documents</p>
+              <svg
+                (click)="cancel()"
+                xmlns="http://www.w3.org/2000/svg"
+                height="27px"
+                viewBox="0 -960 960 960"
+                width="27px"
+              >
+                <path
+                  d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z"
+                />
+              </svg>
+            </div>
+            <div class="for-line"></div>
 
-      <span id="mid-item">
-        <p>Select Document Type </p>
-          <mat-form-field>
-            <mat-select formControlName="DocType" placeholder="Document Type">
-              <mat-option value="">None</mat-option>
-              <mat-option value="ac">Adhaar Card</mat-option>
-              <mat-option value="pc">Pan Card</mat-option>
-              <mat-option value="vi">Voter Id</mat-option>
-              <mat-option value="pp">Passport</mat-option>
-            </mat-select>
-          </mat-form-field>
-      </span>
-      <div>
-        <p style="font-size: small">Please ensure both side documents are uploaded.</p>
-        <input type="file" accept=".png, .jpeg, .jpg" hidden id="inputImg2" (change)="uploadedFile($event)" />
-        <label for="inputImg2">
-          <div class="retimg">
-            <i class="ph ph-cloud-arrow-up" style="font-size: x-large;"></i>
-            <div style="display: flex; gap: 2px; font-size: small">
-              <div>Click To Upload</div>
-              <span style="color: black">or drag and drop</span>
+            <form [formGroup]="AddForm" style="overflow-y: scroll">
+              <span id="mid-item">
+                <p>Select Document Type</p>
+                <mat-form-field>
+                  <mat-select formControlName="DocType" placeholder="Document Type">
+                    <mat-option value="">None</mat-option>
+                    <mat-option value="ac">Adhaar Card</mat-option>
+                    <mat-option value="pc">Pan Card</mat-option>
+                    <mat-option value="vi">Voter Id</mat-option>
+                    <mat-option value="pp">Passport</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </span>
+              <div>
+                <p style="font-size: small">
+                  Please ensure both side documents are uploaded.
+                </p>
+                <input
+                  type="file"
+                  accept=".png, .jpeg, .jpg, .pdf"
+                  hidden
+                  id="inputImg2"
+                  (change)="uploadedFile($event)"
+                />
+                <label for="inputImg2">
+                  <div class="retimg">
+                    <i class="ph ph-cloud-arrow-up" style="font-size: x-large"></i>
+                    <div style="display: flex; gap: 2px; font-size: small">
+                      <div>Click To Upload</div>
+                      <span style="color: black">or drag and drop</span>
+                    </div>
+                  </div>
+                </label>
+              </div>
+              <div style="flex: 1">
+                <div
+                  *ngIf="imgBuffer2()"
+                  style="display: flex; align-items: center; gap: 10px"
+                >
+                  <img src="data:image/png;base64,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" alt="">
+                  <img src="https://cdn-icons-png.flaticon.com/512/29/29072.png">
+                  <p style="font-size: small">
+                    {{ AddForm.get("file")?.value.name }}
+                  </p>
+                  <i
+                    style="color: red"
+                    (click)="
+                      AddForm.get('file')?.setValue(null); imgBuffer2.set(null)
+                    "
+                    class="ph ph-trash"
+                  ></i>
+                </div>
+              </div>
+            </form>
+            <div class="for-line"></div>
+
+            <div style="display: flex; gap: 10px; justify-content: end">
+              <button class="prbtn" (click)="cancel()">Cancel</button>
+              <button class="svbtn" (click)="changeMid()">Save</button>
             </div>
           </div>
-        </label>
-      </div>
-
-      <div style="flex:1">
-        <div *ngIf="imgBuffer2()" style="display: flex; align-items: center; gap: 10px;">
-        <i class="ph ph-file-image"></i>
-        <p style="font-size: small;">{{ AddForm.get('file')?.value.name}}</p>
-        <i style="color:red" (click)="AddForm.get('file')?.setValue(null);imgBuffer2.set(null)" class="ph ph-trash"></i>
         </div>
-      </div>
-      <div class="for-line"></div>
-      <div style="display: flex; gap: 10px; justify-content: end">
-        <button class="prbtn" (click)="cancel()">Cancel</button>
-        <button class="svbtn" (click)="changeMid()">Save</button>
-      </div>
-    </div>
-  </div>
-}
+  }
   <!-- Step 2 -->
   <form [formGroup]="AddForm" *ngIf="pageNo === 2">
     <span class="item">
-      <p>Additional Documents </p>
-      <p style="color:grey;font-size:small;margin-bottom:20px;">
+      <p>Additional Documents</p>
+      <p style="color: grey; font-size: small; margin-bottom: 20px">
         Upload related documents. This step is optional.
       </p>
-      <input type="file" accept=".png, .jpg, .jpeg, .pdf" hidden id="input3" (change)="fileSelected($event)"  />
+      <input
+        type="file"
+        accept=".png, .jpg, .jpeg, .pdf"
+        hidden
+        id="input3"
+        (change)="fileSelected($event)"
+      />
       <label for="input3" id="designimg">
         <div class="sqimg">
-        @if(!AddForm.get('AdditionalFiles')?.value){
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="rgb(89, 87, 222)">
-            <path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z" />
+          @if(!AddForm.get('AdditionalFiles')?.value){
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+            fill="rgb(89, 87, 222)"
+          >
+            <path
+              d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"
+            />
           </svg>
-        }
-        @else {
-          <i style="font-size: x-large;" class="ph ph-file"></i>
-        }
+          } @else {
+          <i style="font-size: x-large" class="ph ph-file"></i>
+          }
         </div>
       </label>
     </span>
     <div class="for-line"></div>
     <div id="buttons">
-      <button class="prbtn" (click)="add(2);requestPageChange(false)">Previous</button>
-      <button class="nxbtn" (click)="add(1);requestPageChange(true)">Next</button>
+      <button class="prbtn" (click)="add(2); requestPageChange(false)">
+        Previous
+      </button>
+      <button class="nxbtn" (click)="add(1); requestPageChange(true)">
+        Next
+      </button>
     </div>
   </form>
 </div>
 <form [formGroup]="AddForm" *ngIf="pageNo === 3">
-<div class="center-container"  id="third-form"> 
+  <div class="center-container" id="third-form">
     <div class="center-container2">
-        <div id="cc-nav">
-            <span style="display:flex;align-items: center;">
-                <img style="border-radius: 50%;height:80px;width:80px;" [src]="(AddForm.get('image')?.value)?AddForm.get('image')?.value : 'https://ui-avatars.com/api/?name='+AddForm.get('name')?.value"  alt="Helper Image" class="helper-image">
-                <span style="display:flex;flex-direction:column;margin-left:1vw;">
-                    <p style="margin:0;padding:0;">{{ AddForm.get('name')?.value }}</p>
-                    <p style="margin:0;padding:0;font-size:small;">{{ AddForm.get('deviceType')?.value}}</p>
-                </span>
-            </span>
+      <div id="cc-nav">
+        <span style="display: flex; align-items: center">
+          <img
+            style="border-radius: 50%; height: 80px; width: 80px"
+            [src]="
+              AddForm.get('image')?.value
+                ? AddForm.get('image')?.value
+                : 'https://ui-avatars.com/api/?name=' +
+                  AddForm.get('name')?.value
+            "
+            alt="Helper Image"
+            class="helper-image"
+          />
+          <span style="display: flex; flex-direction: column; margin-left: 1vw">
+            <p style="margin: 0; padding: 0">
+              {{ AddForm.get("name")?.value }}
+            </p>
+            <p style="margin: 0; padding: 0; font-size: small">
+              {{ AddForm.get("deviceType")?.value }}
+            </p>
+          </span>
+        </span>
+      </div>
+      <div>
+        <div style="display: flex; align-items: center; gap: 10px">
+          <p>Personal Details</p>
+          <div class="line"></div>
         </div>
-        <div>
-            <div style="display:flex;align-items: center;gap:10px"><p>Personal Details</p><div class="line"></div></div>
-            <span class="comp"><p>Gender</p><p> {{ AddForm.get('gender')?.value }}</p></span>
-            <span class="comp"><p>Languages</p><p>
-              {{AddForm.get('languages')?.value}}
-            </p></span>
-             <span class="comp"><p>Mobile No</p><p> {{ AddForm.get('mobile')?.value }}</p></span>
-             <span class="comp"><p>Email Id</p><p> {{ AddForm.get('email')?.value }}</p></span>
-             <span class="comp"><p>KYC Document</p><p style="color:rgb(89, 87, 222);cursor:pointer" >  <i class="ph ph-eye"></i>View</p></span>
-            <div style="display:flex;align-items: center;gap:10px"><p>Service Details</p><div class="line"></div></div>
-             <span class="comp"><p>Type</p><p> {{ AddForm.get('typeOfService')?.value }}</p></span>
-             <span class="comp"><p>Organization</p><p> {{ AddForm.get('organizationName')?.value }}</p></span>
-             <span class="comp"><p>Joined On</p><p> {{ AddForm.get('joiningDate')?.value }}</p></span>
+        <span class="comp"
+          ><p>Gender</p>
+          <p>{{ AddForm.get("gender")?.value }}</p></span
+        >
+        <span class="comp"
+          ><p>Languages</p>
+          <p>
+            {{ AddForm.get("languages")?.value }}
+          </p></span
+        >
+        <span class="comp"
+          ><p>Mobile No</p>
+          <p>{{ AddForm.get("mobile")?.value }}</p></span
+        >
+        <span class="comp"
+          ><p>Email Id</p>
+          <p>{{ AddForm.get("email")?.value }}</p></span
+        >
+        <span class="comp"
+          ><p>KYC Document</p>
+          <p style="color: rgb(89, 87, 222); cursor: pointer">
+            <i class="ph ph-eye"></i>View
+          </p></span
+        >
+        <div style="display: flex; align-items: center; gap: 10px">
+          <p>Service Details</p>
+          <div class="line"></div>
         </div>
+        <span class="comp"
+          ><p>Type</p>
+          <p>{{ AddForm.get("typeOfService")?.value }}</p></span
+        >
+        <span class="comp"
+          ><p>Organization</p>
+          <p>{{ AddForm.get("organizationName")?.value }}</p></span
+        >
+        <span class="comp"
+          ><p>Joined On</p>
+          <p>{{ AddForm.get("joiningDate")?.value }}</p></span
+        >
+      </div>
     </div>
-</div>
-<div class="for-line" style="margin:20px 0;"></div>
-    <div id="buttons">
-      <button class="prbtn" (click)="add(2);requestPageChange(false)">Previous</button>
-      <button class="nxbtn">Add Helper</button>
-    </div>
+  </div>
+  <div class="for-line" style="margin: 20px 0"></div>
+  <div id="buttons">
+    <button class="prbtn" (click)="add(2); requestPageChange(false)">
+      Previous
+    </button>
+    <button class="nxbtn">Add Helper</button>
+  </div>
 </form>

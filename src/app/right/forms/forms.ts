@@ -20,7 +20,7 @@ import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 
 @Component({
   selector: 'app-forms',
-  standalone: true,
+  standalone: true,//jjkjlkkjkjkjkkjkjkljljkljlkjkjkljljjljljljljl. -- ask
   imports: [
     ReactiveFormsModule,
     CommonModule,
@@ -46,12 +46,11 @@ export class Forms {
   get languages() {
     return this.AddForm.get('languages');
   }
-  midBlock = signal<any>(false);
+  midBlock = signal<boolean>(false);
   @Input() pageNo: number = 1;
   @Output() pageChange = new EventEmitter<number>();
 
   requestPageChange(forward: boolean) {
-    console.log(this.AddForm.getRawValue())
     this.pageChange.emit(this.pageNo);
   }
 isFilled(field: string) {
@@ -76,10 +75,8 @@ add(num: number) {
 }
 
   changeMid() {
-    console.log('hit')
     this.midBlock.set(!this.midBlock())
-    this.cdr.detectChanges();
-    console.log(this.AddForm.getRawValue())
+    // this.cdr.detectChanges();
   }
 
 
@@ -97,6 +94,7 @@ add(num: number) {
   uploadedFile(event: Event) {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
+    console.log(file)
     if (file) {
       this.AddForm.get('file')?.setValue(file);
       this.imgBuffer2.set(file);

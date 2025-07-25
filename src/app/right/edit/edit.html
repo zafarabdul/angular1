@@ -1,14 +1,14 @@
 <section>
 <div id="all">
     <div [style]="'display:flex;gap:1vw;'">
-            <button  id="back"routerLink=""> 
+            <button  id="back" routerLink="/"> 
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" ><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg>
             </button>
             <p>Edit Helper</p>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 -960 960 960" ><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg>
 </div>
-<div style="display:flex;gap:1vw;">
+<div style="display:flex;gap:1vw;" >
     <div id="leftpart">
         <p (click)="(isHelperCh(1))" [ngStyle]="{'background-color': isHelper ? 'rgb(138, 136, 136)' : ''}">
             Helper Details
@@ -17,8 +17,219 @@
             Documents
         </p>
     </div>
-    <div >
-sdfdsfsfgyhgjhhhjghjg
+    <div id="right">
+  <form [formGroup]="AddForm">
+    <div style="display:flex;flex-direction: column;padding:2vh 0">
+      <p style="margin:0;font-size: 20px;">Helper Details</p>
+      <p style="font-size:x-small;margin:0;color:grey">
+        Track, add & manage all your helpers in one place
+      </p>
     </div>
+    
+    <input type="file" accept=".png, .jpeg, .jpg" hidden id="inputImg1"  (change)="ImageChange($event)" />
+      @if(imgBuffer()){
+        <label for="inputImg1" >
+        <img style="border-radius: 50%;" [src]="imgBuffer()" width="100" height="100" />
+         </label>
+      }
+      @else {
+          <div class="img">
+            <label for="inputImg1">
+          <span style="display: flex; flex-direction: column; align-items: center;gap:0px;">
+            <i class="ph ph-cloud-arrow-up" style="font-size: x-large;"></i>
+            <p style="font-size: 80%">Upload Photo</p>
+          </span>
+           </label>
+        </div>
+      }
+    <p style="color: grey; font-size: x-small">Upload photo (.png, .jpeg)</p>
+    <span class="item">
+      <p>Type Of Service *</p>
+      <mat-form-field>
+        <mat-select formControlName="typeOfService" placeholder="Select Type Of Service">
+          <mat-option value="maid"><i class="ph ph-broom d"></i> Maid</mat-option>
+          <mat-option value="cook"><i class="ph ph-cooking-pot d"></i> Cook</mat-option>
+          <mat-option value="nurse"><i class="ph ph-first-aid-kit d"></i> Nurse</mat-option>
+          <mat-option value="driver"><i class="ph ph-truck d"></i> Driver</mat-option>
+        </mat-select>
+        <mat-error>Select type of service</mat-error>
+      </mat-form-field>
+    </span>
+    <span class="item">
+      <p>Organization Name *</p>
+      <mat-form-field appearance="fill">
+        <mat-select formControlName="organizationName" placeholder="Organization Name">
+          <mat-option value="ASBL">ASBL</mat-option>
+          <mat-option value="Spring Helpers">Spring Helpers</mat-option>
+        </mat-select>
+        <mat-error *ngIf="AddForm.get('organizationName')?.hasError('required') && AddForm.get('organizationName')?.touched">
+          Organization is required
+        </mat-error>
+      </mat-form-field>
+    </span>
+    <span class="item">
+      <p>Full Name *</p>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Enter Full Name" formControlName="name" />
+        <mat-error *ngIf="AddForm.get('name')?.hasError('required') && AddForm.get('name')?.touched">
+          Full Name Required.
+        </mat-error>
+      </mat-form-field>
+    </span>
+    <span class="item">
+      <p>Languages *</p>
+      <mat-form-field appearance="fill">
+        <mat-select formControlName="languages" multiple placeholder="Select Languages">
+          <mat-select-trigger>
+            {{ AddForm.get('languages')?.value?.[0] || '' }}
+            <ng-container *ngIf="(AddForm.get('languages')?.value?.length || 0) > 1">
+              <span class="example-additional-selection">
+                (+{{ (AddForm.get('languages')?.value?.length || 0) - 1 }} 
+                {{ AddForm.get('languages')?.value?.length === 2 ? 'other' : 'others' }})
+              </span>
+            </ng-container>
+          </mat-select-trigger>
+          <mat-option value="english">English</mat-option>
+          <mat-option value="hindi">Hindi</mat-option>
+          <mat-option value="telugu">Telugu</mat-option>
+          <mat-option value="urdu">Urdu</mat-option>
+          <mat-option value="tamil">Tamil</mat-option>
+        </mat-select>
+        <mat-error *ngIf="AddForm.get('languages')?.touched && AddForm.get('languages')?.hasError('required')">
+          Language is required
+        </mat-error>
+      </mat-form-field>
+    </span>
+
+    <!-- Gender -->
+    <span class="item">
+      <p>Gender *</p>
+      <div>
+        <mat-radio-group formControlName="gender" >
+          <mat-radio-button color="primary" value="male">Male</mat-radio-button>
+          <mat-radio-button color="primary" value="female">Female</mat-radio-button>
+          <mat-radio-button color="primary" value="others">Others</mat-radio-button>
+          <mat-error style="font-size: x-small !important;margin-left: 1.5vw;" *ngIf="AddForm.get('gender')?.touched && AddForm.get('gender')?.hasError('required')">Gender Required</mat-error>
+        </mat-radio-group>
+      </div>
+    </span>
+
+    <!-- Phone -->
+    <span class="item">
+      <p>Phone *</p>
+        <mat-form-field class="example-full-width">
+        <input matInput placeholder="Phone No" formControlName="mobile" />
+        <mat-error *ngIf="AddForm.get('mobile')?.hasError('required') && AddForm.get('mobile')?.touched">
+          Mobile No Required.
+        </mat-error>
+      </mat-form-field>
+    </span>
+
+    <span class="item">
+      <p>Email</p>
+      <mat-form-field>
+        <input matInput placeholder="Enter Email" formControlName="email" />
+        <mat-error *ngIf="AddForm.get('email')?.hasError('required') && AddForm.get('email')?.touched">
+          Email required
+        </mat-error>
+        <mat-error *ngIf="AddForm.get('email')?.hasError('email') && AddForm.get('email')?.touched">
+          Enter a valid email
+        </mat-error>
+      </mat-form-field>
+    </span>
+
+
+    <!-- Vehicle -->
+    <span class="item">
+      <p>Choose Vehicle Type</p>
+      <mat-form-field>
+        <mat-select formControlName="vehicleType" placeholder="None">
+          <mat-option value="">None</mat-option>
+          <mat-option value="auto">Auto</mat-option>
+          <mat-option value="bike">Bike</mat-option>
+          <mat-option value="car">Car</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </span>
+
+    <span *ngIf="AddForm.get('vehicleType')?.value" class="item">
+      <p>Vehicle Number *</p>
+      <mat-form-field>
+        <input matInput placeholder="Enter Vehicle Number" formControlName="vehicleNum" />
+        <mat-error *ngIf="AddForm.get('vehicleNum')?.hasError('required') && AddForm.get('vehicleNum')?.touched">
+          Vehicle Number Is Required.
+        </mat-error>
+      </mat-form-field>
+    </span>
+
+    <span class="item">
+      <p>KYC Documents *</p>
+      <div class="sqimg" (click)="changeMid()">
+        @if(!AddForm.get('file')?.value){
+        <i class="ph ph-plus"></i>
+      }
+      @else {
+        <i class="ph ph-file"></i>
+      }
+    </div>
+    <mat-error style="font-size: small !important;"*ngIf="AddForm.get('file')?.hasError('required') && AddForm.get('file')?.touched">Upload Documents *</mat-error>
+    </span>
+    <div class="for-line" style="margin:10px 0;"></div>
+    <button class="nxbtn" (click)="add(1);">Next</button>
+  </form>
+@if(midBlock()){
+  <div id="mid-bar">
+    <div id="mid">
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <p style="font-weight: 500">Upload KYC Documents</p>
+        <svg (click)="cancel()" xmlns="http://www.w3.org/2000/svg" height="27px" viewBox="0 -960 960 960" width="27px">
+          <path d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z" />
+        </svg>
+      </div>
+      <div class="for-line"></div>
+
+      <span id="mid-item">
+        <p>Select Document Type </p>
+          <mat-form-field>
+            <mat-select formControlName="DocType" placeholder="Document Type">
+              <mat-option value="">None</mat-option>
+              <mat-option value="ac">Adhaar Card</mat-option>
+              <mat-option value="pc">Pan Card</mat-option>
+              <mat-option value="vi">Voter Id</mat-option>
+              <mat-option value="pp">Passport</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </span>
+      <div>
+        <p style="font-size: small">Please ensure both side documents are uploaded.</p>
+        <input type="file" accept=".png, .jpeg, .jpg" hidden id="inputImg2" (change)="uploadedFile($event)" />
+        <label for="inputImg2">
+          <div class="retimg">
+            <i class="ph ph-cloud-arrow-up" style="font-size: x-large;"></i>
+            <div style="display: flex; gap: 2px; font-size: small">
+              <div>Click To Upload</div>
+              <span style="color: black">or drag and drop</span>
+            </div>
+          </div>
+        </label>
+      </div>
+
+      <div style="flex:1">
+        <div *ngIf="imgBuffer2()" style="display: flex; align-items: center; gap: 10px;">
+        <i class="ph ph-file-image"></i>
+        <p style="font-size: small;">{{ AddForm.get('file')?.value.name}}</p>
+        <i style="color:red" (click)="AddForm.get('file')?.setValue(null);imgBuffer2.set(null)" class="ph ph-trash"></i>
+        </div>
+      </div>
+      <div class="for-line"></div>
+      <div style="display: flex; gap: 10px; justify-content: end">
+        <button class="prbtn" (click)="cancel()">Cancel</button>
+        <button class="svbtn" (click)="changeMid()">Save</button>
+      </div>
+    </div>
+  </div>
+}
+</div>
+
     </div>
 </section>
