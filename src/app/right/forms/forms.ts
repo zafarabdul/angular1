@@ -20,7 +20,7 @@ import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 
 @Component({
   selector: 'app-forms',
-  standalone: true,//jjkjlkkjkjkjkkjkjkljljkljlkjkjkljljjljljljljl. -- ask
+  standalone: true, //jjkjlkkjkjkjkkjkjkljljkljlkjkjkljljjljljljljl. -- ask
   imports: [
     ReactiveFormsModule,
     CommonModule,
@@ -37,7 +37,7 @@ import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 })
 export class Forms {
   imgBuffer = signal<any>(null);
-  imgBuffer2= signal<any>(null);
+  imgBuffer2 = signal<any>(null);
   AddForm: FormGroup;
   constructor(public data: Formdata, private readonly cdr: ChangeDetectorRef) {
     this.AddForm = this.data.AddForm;
@@ -53,32 +53,37 @@ export class Forms {
   requestPageChange(forward: boolean) {
     this.pageChange.emit(this.pageNo);
   }
-isFilled(field: string) {
-  const control = this.AddForm.get(field);
-  return control?.touched && control.hasError('required');
-}
+  isFilled(field: string) {
+    const control = this.AddForm.get(field);
+    return control?.touched && control.hasError('required');
+  }
 
-add(num: number) {
-  if (num === 1 && this.pageNo==1) {
-    this.AddForm.markAllAsTouched();
-    if (this.isFilled('typeOfService') || this.isFilled('mobile')  || this.isFilled('organizationName')  || this.isFilled('name')  || this.isFilled('languages')
-    || this.isFilled('gender') || this.isFilled('file') || (this.AddForm.get('vehicleType')?.value && this.isFilled('vehicleNum'))
-    ) return;
-    this.pageNo++;
+  add(num: number) {
+    if (num === 1 && this.pageNo == 1) {
+      this.AddForm.markAllAsTouched();
+      if (
+        this.isFilled('typeOfService') ||
+        this.isFilled('mobile') ||
+        this.isFilled('organizationName') ||
+        this.isFilled('name') ||
+        this.isFilled('languages') ||
+        this.isFilled('gender') ||
+        this.isFilled('file') ||
+        (this.AddForm.get('vehicleType')?.value && this.isFilled('vehicleNum'))
+      )
+        return;
+      this.pageNo++;
+    } else if (num === 1) {
+      this.pageNo++;
+    } else {
+      this.pageNo--;
+    }
   }
-  else if(num === 1) {
-    this.pageNo++;
-  }
-  else {
-    this.pageNo--;
-  }
-}
 
   changeMid() {
-    this.midBlock.set(!this.midBlock())
-    // this.cdr.detectChanges();
+    this.midBlock.set(!this.midBlock());
+    this.cdr.detectChanges();
   }
-
 
   getFile(): string | undefined {
     const file = this.AddForm.get('file')?.value;
@@ -94,23 +99,20 @@ add(num: number) {
   uploadedFile(event: Event) {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
-    console.log(file)
+    console.log(file);
     if (file) {
       this.AddForm.get('file')?.setValue(file);
       this.imgBuffer2.set(file);
     }
   }
-  fileSelected(event :Event){
-     const input = event.target as HTMLInputElement;
+  fileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
     if (file) {
       this.AddForm.get('AdditionalFiles')?.setValue(file);
       this.imgBuffer2.set(file);
     }
-   
   }
-
-  
 
   ImageChange(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -124,5 +126,4 @@ add(num: number) {
       reader.readAsDataURL(file);
     }
   }
-
 }

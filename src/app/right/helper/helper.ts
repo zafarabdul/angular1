@@ -42,7 +42,6 @@ export class Helper {
   }
   changeDef(name: string): void {
     this.defaultId.set(name);
-    // console.log(this.defaultData());
   }
 
 SearchItem(): void {
@@ -73,7 +72,6 @@ SearchItem(): void {
     if(got==1)this.isVisible.set(!this.isVisible());
     else if(got==2){
       this.isVisiblea.set(!this.isVisiblea());
-      console.log('showed 2');
     }
   }
 
@@ -81,13 +79,10 @@ SearchItem(): void {
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     if (!target.closest('.sort-box') && !target.closest('#sort')) {
-      // console.log('triggered a');
       this.isVisible.set(false);
     }
     if(!target.closest('.filter-box') && !target.closest('#filter')){
-      console.log('sdfds');
       this.isVisiblea.set(false);
-      // console.log('triggered b');
     }
     // if(!target.closest(''))
   }

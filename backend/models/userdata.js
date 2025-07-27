@@ -1,0 +1,63 @@
+const mongoose = require('mongoose');
+const userSchema= new mongoose.Schema({
+    empId:{
+        type:Number,
+        required:true,
+        unique:true
+    },
+    image:{
+        type:String,
+    },
+    typeOfService:{
+        type:String,
+        required:true
+    },
+    organizationName:{
+        type:String,    
+        required:true
+    },
+    name:{
+        type:String,
+        required:true
+    },
+    email:{
+        type:String,
+        required:true,
+        unique:true
+    },
+    mobile:{
+        type:String,
+        required:true,
+        unique:true
+    },
+    languages:{
+        type:Array,
+        required:true
+    },
+    gender:{
+        type:String,
+        required:true
+    },
+    vehicleType:{
+        type:String
+    },
+    vehicleNum:{
+        type:String
+    },
+    file:{
+        type:String
+    },
+    DocType:{
+        type:String
+    },
+    additionalFiles:{
+        type:String,
+    },
+    joiningDate:{
+        type:Date,
+        required:true
+    }
+})
+
+const User = mongoose.model("Userdata", userSchema);
+module.exports = User;

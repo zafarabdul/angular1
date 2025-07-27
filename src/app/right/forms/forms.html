@@ -257,92 +257,94 @@
     </button>
   </form>
   @if(midBlock()){
-        <div id="mid-bar">
-          <div id="mid">
-            <div
-              style="
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
+  <div id="mid-bar">
+    <div id="mid">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        "
+      >
+        <p style="font-weight: 500">Upload KYC Documents</p>
+        <svg
+          (click)="cancel()"
+          xmlns="http://www.w3.org/2000/svg"
+          height="27px"
+          viewBox="0 -960 960 960"
+          width="27px"
+        >
+          <path
+            d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z"
+          />
+        </svg>
+      </div>
+      <div class="for-line"></div>
+
+      <form [formGroup]="AddForm" style="overflow-y: scroll;flex:1">
+        <span id="mid-item">
+          <p>Select Document Type</p>
+          <mat-form-field>
+            <mat-select formControlName="DocType" placeholder="Document Type">
+              <mat-option value="">None</mat-option>
+              <mat-option value="ac">Adhaar Card</mat-option>
+              <mat-option value="pc">Pan Card</mat-option>
+              <mat-option value="vi">Voter Id</mat-option>
+              <mat-option value="pp">Passport</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </span>
+        <div>
+          <p style="font-size: small">
+            Please ensure both side documents are uploaded.
+          </p>
+          <input
+            type="file"
+            accept=".png, .jpeg, .jpg, .pdf"
+            hidden
+            id="inputImg2"
+            (change)="uploadedFile($event)"
+          />
+          <label for="inputImg2">
+            <div class="retimg">
+              <i class="ph ph-cloud-arrow-up" style="font-size: x-large"></i>
+              <div style="display: flex; gap: 2px; font-size: small">
+                <div>Click To Upload</div>
+                <span style="color: black">or drag and drop</span>
+              </div>
+            </div>
+          </label>
+        </div>
+        <div style="flex: 1">
+          <div
+            *ngIf="imgBuffer2()"
+            style="display: flex; align-items: center; gap: 10px"
+          >
+            <img *ngIf="AddForm.get('file')?.value?.type === 'application/pdf'" loading="lazy"  width="40px" height="40px" src="https://upload.wikimedia.org/wikipedia/commons/3/38/Icon_pdf_file.svg" alt="pdf image" >
+            <img *ngIf="AddForm.get('file')?.value.type === 'image/png'" width="40px" height="40px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIc37_zjsamS48qGyTHQklsUgsNit-gNw360BKx_L9ARsPE19liMDS6YWVsA92WHQwVQ8&usqp=CAU" alt="png image">
+            <img *ngIf="AddForm.get('file')?.value.type === 'image/jpeg'" width="40px" height="40px" src="https://cdn-icons-png.flaticon.com/512/2656/2656444.png" alt="jpeg image">
+            <img *ngIf="AddForm.get('file')?.value.type === 'image/jpg'" width="40px" height="40px" src="https://cdn-icons-png.flaticon.com/512/29/29264.png" alt="jpg image">
+
+            <p style="font-size: small">
+              {{ AddForm.get("file")?.value.name }}
+            </p>
+            <i
+              style="color: red"
+              (click)="
+                AddForm.get('file')?.setValue(null); imgBuffer2.set(null)
               "
-            >
-              <p style="font-weight: 500">Upload KYC Documents</p>
-              <svg
-                (click)="cancel()"
-                xmlns="http://www.w3.org/2000/svg"
-                height="27px"
-                viewBox="0 -960 960 960"
-                width="27px"
-              >
-                <path
-                  d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z"
-                />
-              </svg>
-            </div>
-            <div class="for-line"></div>
-
-            <form [formGroup]="AddForm" style="overflow-y: scroll">
-              <span id="mid-item">
-                <p>Select Document Type</p>
-                <mat-form-field>
-                  <mat-select formControlName="DocType" placeholder="Document Type">
-                    <mat-option value="">None</mat-option>
-                    <mat-option value="ac">Adhaar Card</mat-option>
-                    <mat-option value="pc">Pan Card</mat-option>
-                    <mat-option value="vi">Voter Id</mat-option>
-                    <mat-option value="pp">Passport</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </span>
-              <div>
-                <p style="font-size: small">
-                  Please ensure both side documents are uploaded.
-                </p>
-                <input
-                  type="file"
-                  accept=".png, .jpeg, .jpg, .pdf"
-                  hidden
-                  id="inputImg2"
-                  (change)="uploadedFile($event)"
-                />
-                <label for="inputImg2">
-                  <div class="retimg">
-                    <i class="ph ph-cloud-arrow-up" style="font-size: x-large"></i>
-                    <div style="display: flex; gap: 2px; font-size: small">
-                      <div>Click To Upload</div>
-                      <span style="color: black">or drag and drop</span>
-                    </div>
-                  </div>
-                </label>
-              </div>
-              <div style="flex: 1">
-                <div
-                  *ngIf="imgBuffer2()"
-                  style="display: flex; align-items: center; gap: 10px"
-                >
-                  <img src="data:image/png;base64,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" alt="">
-                  <img src="https://cdn-icons-png.flaticon.com/512/29/29072.png">
-                  <p style="font-size: small">
-                    {{ AddForm.get("file")?.value.name }}
-                  </p>
-                  <i
-                    style="color: red"
-                    (click)="
-                      AddForm.get('file')?.setValue(null); imgBuffer2.set(null)
-                    "
-                    class="ph ph-trash"
-                  ></i>
-                </div>
-              </div>
-            </form>
-            <div class="for-line"></div>
-
-            <div style="display: flex; gap: 10px; justify-content: end">
-              <button class="prbtn" (click)="cancel()">Cancel</button>
-              <button class="svbtn" (click)="changeMid()">Save</button>
-            </div>
+              class="ph ph-trash"
+            ></i>
           </div>
         </div>
+      </form>
+      <div class="for-line"></div>
+      <div style="display: flex; gap: 10px; justify-content: end">
+        <button class="prbtn" (click)="cancel()">Cancel</button>
+        <button class="svbtn" (click)="changeMid()">Save</button>
+      </div>
+    </div>
+  </div>
   }
   <!-- Step 2 -->
   <form [formGroup]="AddForm" *ngIf="pageNo === 2">
