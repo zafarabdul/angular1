@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-dotenv.config(); // load .env
-
-console.log("🔍 Loaded MONGODB_URI =", process.env.MONGODB_URI);
+dotenv.config();
 
 const MONGO_URI = process.env.MONGODB_URI;
 

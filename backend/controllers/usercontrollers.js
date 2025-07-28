@@ -12,8 +12,6 @@ exports.createUser = async (req, res) => {
   }
 };
 
-
-// READ
 exports.getUsers = async (req, res) => {
   try {
     const users = await User.find();
@@ -23,7 +21,6 @@ exports.getUsers = async (req, res) => {
   }
 };
 
-// UPDATE
 exports.updateUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -49,6 +46,17 @@ exports.deleteUser = async (req, res) => {
     }
     res.status(200).json({ message: 'User deleted successfully', user: deletedUser });
   } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.findByName = async (req, res) => {
+  try{
+    const {name} = req.params.name;
+    const {users}= await User.find({name:name});
+    res.json(users);
+  }
+  catch (error) {
     res.status(500).json({ error: error.message });
   }
 };

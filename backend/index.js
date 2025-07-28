@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
   res.send('✅ API is working');
   console.log('GET request received');
 });
-const PORT = process.env.PORT || 3060;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });

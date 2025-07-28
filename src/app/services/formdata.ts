@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+// import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class Formdata {
+  URL='http://localhost:3000/api/';
+  // constructor(private http: HttpClient) {}
+  // getUserData(){
+  //     return this.http.get(this.URL+'users');
+  //   }
     AddForm= new FormGroup({
     empId:new FormControl(''),
     image:new FormControl<null | File | undefined>(null),
