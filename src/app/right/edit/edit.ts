@@ -6,7 +6,8 @@ import {
   Output,
   EventEmitter,
   signal,
-}from '@angular/core';
+  OnInit,
+} from '@angular/core';
 import { CommonModule, NgStyle } from '@angular/common';
 import { FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Formdata } from '../../services/formdata';
@@ -14,13 +15,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { RouterLink } from '@angular/router';
+import { RouterLink, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.html',
   styleUrl: './edit.css',
-  standalone:true,
+  standalone: true,
   imports: [
     ReactiveFormsModule,
     ReactiveFormsModule,
@@ -32,54 +33,71 @@ import { RouterLink } from '@angular/router';
     MatRadioButton,
     MatRadioGroup,
     RouterLink,
-],
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Edit {
-isHelper: any;
-isHelperCh(arg0: number) {
-throw new Error('Method not implemented.');
-}
+  isHelper = 1;
+  isHelperCh(arg: number) {
+    this.isHelper = arg;
+  }
   imgBuffer = signal<any>(null);
-  imgBuffer2= signal<any>(null);
+  imgBuffer2 = signal<any>(null);
   AddForm: FormGroup;
-  constructor(public data: Formdata, private readonly cdr: ChangeDetectorRef) {
+  constructor(
+    public data: Formdata,
+    private readonly cdr: ChangeDetectorRef,
+    private route: ActivatedRoute
+  ) {
     this.AddForm = this.data.AddForm;
   }
-
-  get languages() {
-    return this.AddForm.get('languages');
+  userId = '';
+  ngOnInit(): void {
+    this.route.queryParamMap.subscribe((params) => {
+      this.userId = params.get('_id')!;
+    });
+    this.data.getUserById(this.userId).subscribe((res: any) => {
+      this.AddForm.patchValue(res);
+      // this.imgBuffer.set(res.image);
+      // this.imgBuffer2.set(res.file);
+      this.cdr.detectChanges();
+    });
   }
   midBlock = signal<any>(false);
-  pageNo=1
-isFilled(field: string) {
-  const control = this.AddForm.get(field);
-  return control?.touched && control.hasError('required');
-}
+  pageNo = 1;
+  isFilled(field: string) {
+    const control = this.AddForm.get(field);
+    return control?.touched && control.hasError('required');
+  }
 
-add(num: number) {
-  if (num === 1 && this.pageNo==1) {
-    this.AddForm.markAllAsTouched();
-    if (this.isFilled('typeOfService') || this.isFilled('mobile')  || this.isFilled('organizationName')  || this.isFilled('name')  || this.isFilled('languages')
-    || this.isFilled('gender') || this.isFilled('file') || (this.AddForm.get('vehicleType')?.value && this.isFilled('vehicleNum'))
-    ) return;
-    this.pageNo++;
+  add(num: number) {
+    if (num === 1 && this.pageNo == 1) {
+      this.AddForm.markAllAsTouched();
+      if (
+        this.isFilled('typeOfService') ||
+        this.isFilled('mobile') ||
+        this.isFilled('organizationName') ||
+        this.isFilled('name') ||
+        this.isFilled('languages') ||
+        this.isFilled('gender') ||
+        this.isFilled('file') ||
+        (this.AddForm.get('vehicleType')?.value && this.isFilled('vehicleNum'))
+      )
+        return;
+      this.pageNo++;
+    } else if (num === 1) {
+      this.pageNo++;
+    } else {
+      this.pageNo--;
+    }
   }
-  else if(num === 1) {
-    this.pageNo++;
-  }
-  else {
-    this.pageNo--;
-  }
-}
 
   changeMid() {
-    console.log('hit')
-    this.midBlock.set(!this.midBlock())
+    console.log('hit');
+    this.midBlock.set(!this.midBlock());
     this.cdr.detectChanges();
-    console.log(this.AddForm.getRawValue())
+    console.log(this.AddForm.getRawValue());
   }
-
 
   getFile(): string | undefined {
     const file = this.AddForm.get('file')?.value;
@@ -100,17 +118,14 @@ add(num: number) {
       this.imgBuffer2.set(file);
     }
   }
-  fileSelected(event :Event){
-     const input = event.target as HTMLInputElement;
+  fileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
     if (file) {
       this.AddForm.get('AdditionalFiles')?.setValue(file);
       this.imgBuffer2.set(file);
     }
-   
   }
-
-  
 
   ImageChange(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -124,6 +139,4 @@ add(num: number) {
       reader.readAsDataURL(file);
     }
   }
-
 }
-

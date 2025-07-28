@@ -126,4 +126,10 @@ export class Forms {
       reader.readAsDataURL(file);
     }
   }
+  addHelper(){
+    this.data.AddUser().subscribe((res)=>{
+      console.log(res);
+      ////make a box
+    });
+  }
 }

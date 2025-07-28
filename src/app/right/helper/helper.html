@@ -73,14 +73,14 @@
                 <img [src]="'https://ui-avatars.com/api/?name='+defaultData()?.name" alt="Helper Image" class="helper-image">
                 <span style="display:flex;flex-direction:column;margin-left:1vw;">
                     <p style="margin:0;padding:0;">{{ defaultData()?.name }}</p>
-                    <p style="margin:0;padding:0;font-size:small;">{{ defaultData()?.deviceType}}</p>
+                    <p style="margin:0;padding:0;font-size:small;">{{ defaultData()?.typeOfService}}</p>
                 </span>
             </span>
             <div id="btns">
-                <button class="edit-btn"  [routerLink]="['edit']" [queryParams]="{ name: 'zafar' }" >
+                <button class="edit-btn"  [routerLink]="['edit']" [queryParams]="{ '_id': defaultData()?._id }" >
                     <svg xmlns="http://www.w3.org/2000/svg" width="16px" viewBox="0 -960 960 960"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg>
                 </button>
-                <button class="bin-btn">
+                <button class="bin-btn" (click)="deleteHelper(defaultData()?._id)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16px" viewBox="0 -960 960 960"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
                 </button>
             </div>
@@ -91,14 +91,14 @@
              <span class="comp"><p>Employee Code</p><p> {{ defaultData()?.empId }}</p></span>
             <div style="display:flex;align-items: center;gap:10px"><p>Personal Details</p><div class="line"></div></div>
             <span class="comp"><p>Gender</p><p> {{ defaultData()?.gender }}</p></span>
-            <span class="comp"><p>Languages</p><p> {{ defaultData()?.language }}</p></span>
+            <span class="comp"><p>Languages</p><p>{{ defaultData()?.languages}}</p></span>
              <span class="comp"><p>Mobile No</p><p> {{ defaultData()?.mobile }}</p></span>
              <span class="comp"><p>Email Id</p><p> {{ defaultData()?.email }}</p></span>
-             <span class="comp"><p>KYC Document</p><p> {{ defaultData()?.language }}</p></span>
+             <span class="comp"><p>KYC Document</p><p> edit this</p></span>
             <div style="display:flex;align-items: center;gap:10px"><p>Service Details</p><div class="line"></div></div>
-             <span class="comp"><p>Type</p><p> {{ defaultData()?.serviceType }}</p></span>
-             <span class="comp"><p>Organization</p><p> {{ defaultData()?.organization }}</p></span>
-             <span class="comp"><p>Joined On</p><p> {{ defaultData()?.joinedDate }}</p></span>
+             <span class="comp"><p>Type</p><p> {{ defaultData()?.typeOfService }}</p></span>
+             <span class="comp"><p>Organization</p><p> {{ defaultData()?.organizationName }}</p></span>
+             <span class="comp"><p>Joined On</p><p> {{ defaultData()?.joiningDate | date }}</p></span>
         </div>
     </div>
 </div>

@@ -40,7 +40,7 @@ exports.updateUser = async (req, res) => {
 exports.deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const deletedUser = await User.findByIdAndDelete(id);
+    const deletedUser = await User.findByIdAndDelete( id);
     if (!deletedUser) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -50,10 +50,10 @@ exports.deleteUser = async (req, res) => {
   }
 };
 
-exports.findByName = async (req, res) => {
+exports.findById = async (req, res) => {
   try{
-    const {name} = req.params.name;
-    const {users}= await User.find({name:name});
+    const {id} = req.params;
+    const {users}= await User.findById(id);
     res.json(users);
   }
   catch (error) {
