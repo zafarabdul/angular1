@@ -3,11 +3,20 @@ import { FormsModule, FormGroup } from '@angular/forms';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Formdata } from '../../services/formdata';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatExpansionModule} from '@angular/material/expansion';
+
+export interface Task {
+  name: string;
+  completed: boolean;
+  value:string;
+  subtasks?: Task[];
+}
 
 @Component({
   selector: 'helper',
   standalone: true,
-  imports: [FormsModule, RouterLink, CommonModule, NgIf, NgFor],
+  imports: [FormsModule, RouterLink, CommonModule, NgIf, NgFor,MatCheckboxModule,MatExpansionModule],
   templateUrl: './helper.html',
   styleUrl: './helper.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -106,4 +115,65 @@ export class Helper {
         this.defaultId.set(this.data()[0].name);
     });
   }
+    readonly task = signal<Task>({
+    name: 'Select All',
+    completed: false,
+    value:'select all',
+    subtasks: [
+      {name: 'ASBL', completed: false,value:'asbl'},
+      {name: 'Springs Helpers', completed: false ,value:'spring helpers'},
+    ],
+  });
+     readonly task2 = signal<Task>({
+    name: 'Select All',
+    completed: false,
+    value:'select all',
+    subtasks: [
+      {name: 'Cook', completed: false,value:'cook'},
+      {name: 'Maid', completed: false ,value:'maid'},
+      {name: 'Nurse', completed: false ,value:'nurse'},
+      {name: 'Driver', completed: false ,value:'driver'},
+    ],
+  });
+readonly partiallyComplete2 = computed(() => {
+    const task = this.task();
+    if (!task.subtasks) {
+      return false;
+    }
+    return task.subtasks.some(t => t.completed) && !task.subtasks.every(t => t.completed);
+  });
+  readonly partiallyComplete = computed(() => {
+    const task = this.task();
+    if (!task.subtasks) {
+      return false;
+    }
+    return task.subtasks.some(t => t.completed) && !task.subtasks.every(t => t.completed);
+  });
+
+  update(completed: boolean, index?: number) {
+    this.task.update(task => {
+      if (index === undefined) {
+        task.completed = completed;
+        task.subtasks?.forEach(t => (t.completed = completed));
+      } else {
+        task.subtasks![index].completed = completed;
+        task.completed = task.subtasks?.every(t => t.completed) ?? true;
+      }
+      return {...task};
+    });
+  }
+    update2(completed: boolean, index?: number) {
+    this.task.update(task => {
+      if (index === undefined) {
+        task.completed = completed;
+        task.subtasks?.forEach(t => (t.completed = completed));
+      } else {
+        task.subtasks![index].completed = completed;
+        task.completed = task.subtasks?.every(t => t.completed) ?? true;
+      }
+      return {...task};
+    });
+  }
+  readonly panelOpenState = signal(false);
+  readonly panelOpenState2 = signal(false);
 }

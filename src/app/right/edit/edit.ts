@@ -55,12 +55,12 @@ export class Edit {
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
       this.userId = params.get('_id')!;
-    });
-    this.data.getUserById(this.userId).subscribe((res: any) => {
-      this.AddForm.patchValue(res);
-      // this.imgBuffer.set(res.image);
-      // this.imgBuffer2.set(res.file);
-      this.cdr.detectChanges();
+      this.data.getUserById(this.userId).subscribe((res: any) => {
+        this.AddForm.patchValue(res);
+        this.imgBuffer.set(res.image);
+        this.imgBuffer2.set(res.file);
+        this.cdr.detectChanges();
+      });
     });
   }
   midBlock = signal<any>(false);
@@ -80,7 +80,7 @@ export class Edit {
         this.isFilled('name') ||
         this.isFilled('languages') ||
         this.isFilled('gender') ||
-        this.isFilled('file') ||
+        // this.isFilled('file') ||
         (this.AddForm.get('vehicleType')?.value && this.isFilled('vehicleNum'))
       )
         return;
@@ -93,10 +93,8 @@ export class Edit {
   }
 
   changeMid() {
-    console.log('hit');
     this.midBlock.set(!this.midBlock());
     this.cdr.detectChanges();
-    console.log(this.AddForm.getRawValue());
   }
 
   getFile(): string | undefined {

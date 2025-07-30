@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,9 +13,6 @@ export class Formdata {
   constructor(private http: HttpClient) {}
   getUserData(){
       return this.http.get(this.URL+'users');
-  }
-  getUsersByName(name:string){
-    return this.http.get(this.URL+'users/'+name);
   }
   getUserById(id:string){
     return this.http.get(this.URL+'users/'+id);
@@ -38,7 +36,7 @@ export class Formdata {
     languages:new FormControl([], [Validators.required]),
     gender:new FormControl('',[Validators.required]),
     mobile:new FormControl('',[Validators.required]),
-    email:new FormControl(''),
+    email:new FormControl('',[Validators.required , Validators.email]),
     vehicleType:new FormControl<null|string>(null),
     vehicleNum:new FormControl<string>('',[Validators.required]),
     file:new FormControl<null | File | undefined>(null,[Validators.required]),

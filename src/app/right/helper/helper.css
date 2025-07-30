@@ -244,3 +244,37 @@ select{
     border: 1px solid rgb(157, 155, 155);
     cursor: pointer;
 }
+/* Add this to your component's CSS/SCSS file */
+
+.example-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.example-list-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* space between checkboxes */
+}
+
+/* Override Angular Material checkbox color to blue */
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: #2196f3 !important; /* blue */
+}
+
+::ng-deep .mat-checkbox.mat-accent .mat-checkbox-frame {
+  border-color: #2196f3 !important; /* blue border */
+}
+
+::ng-deep .mat-checkbox.mat-accent .mat-checkbox-checkmark-path {
+  stroke: white !important;
+}
+
+::ng-deep mat-option :hover{ 
+  background-color: rgb(136, 134, 238) !important;
+}
+::ng-deep div.mat-mdc-select-panel :hover{
+  background-color: rgb(136, 134, 238) !important;
+  }

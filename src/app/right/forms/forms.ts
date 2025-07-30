@@ -10,13 +10,14 @@ import {
   NgZone,
   signal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Formdata } from '../../services/formdata';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forms',
@@ -29,6 +30,7 @@ import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
     MatInputModule,
     FormsModule,
     MatRadioGroup,
+    NgIf,
     MatRadioButton,
   ],
   templateUrl: './forms.html',
@@ -36,10 +38,12 @@ import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Forms {
+  completed = signal<boolean>(false);
+  display = signal<boolean>(false);
   imgBuffer = signal<any>(null);
   imgBuffer2 = signal<any>(null);
   AddForm: FormGroup;
-  constructor(public data: Formdata, private readonly cdr: ChangeDetectorRef) {
+  constructor(public data: Formdata, private readonly cdr: ChangeDetectorRef,private router: Router) {
     this.AddForm = this.data.AddForm;
   }
 
@@ -78,6 +82,7 @@ export class Forms {
     } else {
       this.pageNo--;
     }
+    console.log(this.pageNo)
   }
 
   changeMid() {
@@ -127,9 +132,16 @@ export class Forms {
     }
   }
   addHelper(){
-    this.data.AddUser().subscribe((res)=>{
-      console.log(res);
-      ////make a box
-    });
+    // this.data.AddUser().subscribe((res)=>{
+      this.completed.set(!this.completed());
+      setTimeout(()=>{
+        this.completed.set(!this.completed);
+        this.display.set(!this.display());
+      },1000)
+
+    // });
+  }
+  goHome() {
+    this.router.navigate(['/']);
   }
 }

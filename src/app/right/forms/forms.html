@@ -71,8 +71,8 @@
           formControlName="organizationName"
           placeholder="Organization Name"
         >
-          <mat-option value="ASBL">ASBL</mat-option>
-          <mat-option value="Spring Helpers">Spring Helpers</mat-option>
+          <mat-option value="asvl">ASBL</mat-option>
+          <mat-option value="spring helpers">Spring Helpers</mat-option>
         </mat-select>
         <mat-error
           *ngIf="
@@ -166,7 +166,7 @@
     <span class="item">
       <p>Phone *</p>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Phone No" formControlName="mobile" />
+        <input type="number" matInput placeholder="Phone No" formControlName="mobile" />
         <mat-error
           *ngIf="
             AddForm.get('mobile')?.hasError('required') &&
@@ -181,7 +181,7 @@
     <span class="item">
       <p>Email</p>
       <mat-form-field>
-        <input matInput placeholder="Enter Email" formControlName="email" />
+        <input type="email" matInput placeholder="Enter Email" formControlName="email"/>
         <mat-error
           *ngIf="
             AddForm.get('email')?.hasError('required') &&
@@ -473,3 +473,13 @@
     <button class="nxbtn" (click)="addHelper()">Add Helper</button>
   </div>
 </form>
+<div id="m1" *ngIf="completed()">
+  <div id="m1-content">
+    <i  id="tickps" class="ph ph-check"></i>
+  </div>
+</div>
+<div id="m1" *ngIf="display()">
+  <div id="m2-content">
+    <div style="display:flex;justify-content: space-between;align-items: center;"><p>Employee Id</p> <i (click)="goHome()" class="ph ph-caret-left"></i></div>
+  </div>
+</div>

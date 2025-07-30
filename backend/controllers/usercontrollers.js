@@ -53,8 +53,9 @@ exports.deleteUser = async (req, res) => {
 exports.findById = async (req, res) => {
   try{
     const {id} = req.params;
-    const {users}= await User.findById(id);
+    const users= await User.findById(id);
     res.json(users);
+    console.log(users);
   }
   catch (error) {
     res.status(500).json({ error: error.message });

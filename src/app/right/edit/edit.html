@@ -187,7 +187,7 @@
         </svg>
       </div>
       <div class="for-line"></div>
-
+<form [formGroup]="AddForm">
       <span id="mid-item">
         <p>Select Document Type </p>
           <mat-form-field>
@@ -213,7 +213,7 @@
           </div>
         </label>
       </div>
-
+</form>
       <div style="flex:1">
         <div *ngIf="imgBuffer2()" style="display: flex; align-items: center; gap: 10px;">
         <i class="ph ph-file-image"></i>

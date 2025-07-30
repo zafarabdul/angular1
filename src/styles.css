@@ -4,7 +4,7 @@ body{
     padding: 0;
     font-family: Arial, sans-serif;
 }
-button:hover , svg:hover{
+button:hover , svg:hover, .ph:hover{
     cursor: pointer;
 }
 html, body { height: 100%; }
